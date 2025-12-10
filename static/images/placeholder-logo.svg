@@ -1,0 +1,43 @@
+<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="50" height="50" rx="12" fill="url(#gradient)" filter="url(#shadow)"/>
+  
+  <!-- Hotel Building Icon -->
+  <g transform="translate(12, 10)">
+    <!-- Main Building -->
+    <rect x="3" y="8" width="20" height="22" fill="white" opacity="0.95"/>
+    
+    <!-- Windows -->
+    <rect x="6" y="11" width="3" height="3" fill="#2563eb" opacity="0.8"/>
+    <rect x="11.5" y="11" width="3" height="3" fill="#2563eb" opacity="0.8"/>
+    <rect x="17" y="11" width="3" height="3" fill="#2563eb" opacity="0.8"/>
+    
+    <rect x="6" y="16" width="3" height="3" fill="#2563eb" opacity="0.8"/>
+    <rect x="11.5" y="16" width="3" height="3" fill="#2563eb" opacity="0.8"/>
+    <rect x="17" y="16" width="3" height="3" fill="#2563eb" opacity="0.8"/>
+    
+    <rect x="6" y="21" width="3" height="3" fill="#2563eb" opacity="0.8"/>
+    <rect x="11.5" y="21" width="3" height="3" fill="#2563eb" opacity="0.8"/>
+    <rect x="17" y="21" width="3" height="3" fill="#2563eb" opacity="0.8"/>
+    
+    <!-- Door -->
+    <rect x="10" y="25" width="6" height="5" fill="#2563eb"/>
+    
+    <!-- Roof -->
+    <path d="M 13 3 L 3 8 L 23 8 Z" fill="white" opacity="0.95"/>
+    
+    <!-- Flag -->
+    <rect x="12" y="0" width="1" height="8" fill="white"/>
+    <path d="M 13 1 L 18 3 L 13 5 Z" fill="#ef4444"/>
+  </g>
+</svg>

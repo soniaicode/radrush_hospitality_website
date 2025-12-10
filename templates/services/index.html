@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Our Services - Radrush Hospitality{% endblock %}
+
+{% block extra_css %}
+<style>
+    .page-header { padding: 150px 0 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; }
+    .page-header h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .services-detail-section { padding: 80px 0; }
+    @media (max-width: 768px) { .page-header h1 { font-size: 2rem; } }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="page-header" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1920') center/cover;">
+    <div class="container">
+        <h1>Our Services</h1>
+        <p>Comprehensive promotional solutions for every hospitality business</p>
+    </div>
+</section>
+
+<section class="services-detail-section">
+    <div class="container">
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-hotel"></i></div>
+                <h3>Hotels</h3>
+                <p>Comprehensive marketing solutions to increase bookings and enhance your hotel's online presence.</p>
+                <a href="{{ url_for('hotels') }}" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-umbrella-beach"></i></div>
+                <h3>Resorts</h3>
+                <p>Showcase your resort's unique amenities and attractions with compelling campaigns.</p>
+                <a href="{{ url_for('resorts') }}" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-dumbbell"></i></div>
+                <h3>Gyms & Fitness Centers</h3>
+                <p>Build your gym membership base with targeted promotional campaigns.</p>
+                <a href="{{ url_for('gyms') }}" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-glass-cheers"></i></div>
+                <h3>Clubs & Pubs</h3>
+                <p>Increase footfall and create buzz around your venue with engaging content.</p>
+                <a href="{{ url_for('clubs_pubs') }}" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-ring"></i></div>
+                <h3>Wedding Planning</h3>
+                <p>Connect with couples planning their special day and showcase your services.</p>
+                <a href="{{ url_for('wedding_planning') }}" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-utensils"></i></div>
+                <h3>Restaurants & Cafes</h3>
+                <p>Promote your culinary offerings and attract food lovers.</p>
+                <a href="{{ url_for('contact') }}" class="service-link">Contact Us <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="why-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>What We Offer</h2>
+            <p>Complete promotional package for your business</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-bullhorn"></i></div>
+                <h3>Social Media Marketing</h3>
+                <p>Engaging content across all platforms</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-camera"></i></div>
+                <h3>Content Creation</h3>
+                <p>Professional photos and videos</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-search"></i></div>
+                <h3>SEO Optimization</h3>
+                <p>Improve your online visibility</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-ad"></i></div>
+                <h3>Digital Advertising</h3>
+                <p>Targeted ad campaigns</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Get Started?</h2>
+            <p>Let's create a customized promotional strategy for your business</p>
+            <a href="{{ url_for('contact') }}" class="btn btn-primary">Contact Us Today</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block title %}Radrush Hospitality - Free Promotional Services{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Animated Background -->
+<section class="hero">
+    <!-- Background Slider -->
+    <div class="hero-slider">
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1920&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1920&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80');"></div>
+    </div>
+    
+    <div class="hero-overlay"></div>
+    
+    <!-- Service Labels -->
+    <div class="service-label">
+        <span class="label-text active" data-service="hotels">Hotels</span>
+        <span class="label-text" data-service="resorts">Resorts</span>
+        <span class="label-text" data-service="gyms">Gyms</span>
+        <span class="label-text" data-service="clubs">Clubs & Pubs</span>
+        <span class="label-text" data-service="wedding">Wedding Planning</span>
+    </div>
+    
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-star"></i>
+                <span>100% Free Services</span>
+            </div>
+            <h1 class="hero-title">Elevate Your Hospitality Business</h1>
+            <p class="hero-subtitle">Free Promotional Services for Hotels, Resorts, Gyms, Clubs & More</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Happy Clients</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Campaigns</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Free</span>
+                </div>
+            </div>
+            <div class="hero-buttons">
+                <a href="{{ url_for('services') }}" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> Explore Services
+                </a>
+                <a href="{{ url_for('contact') }}" class="btn btn-secondary">
+                    <i class="fas fa-phone"></i> Get Started
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slider Controls -->
+    <div class="slider-controls">
+        <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+        <div class="slider-dots">
+            <span class="dot active" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+            <span class="dot" data-slide="3"></span>
+            <span class="dot" data-slide="4"></span>
+            <span class="dot" data-slide="5"></span>
+        </div>
+        <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    
+    <div class="scroll-indicator">
+        <i class="fas fa-chevron-down"></i>
+    </div>
+</section>
+
+<!-- Services Overview -->
+<section class="services-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Services</h2>
+            <p>Comprehensive promotional solutions tailored for your business</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-hotel"></i>
+                </div>
+                <h3>Hotels</h3>
+                <p>Boost your hotel's visibility with our targeted promotional campaigns</p>
+                <a href="{{ url_for('hotels') }}" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-umbrella-beach"></i>
+                </div>
+                <h3>Resorts</h3>
+                <p>Attract more guests to your resort with strategic marketing</p>
+                <a href="{{ url_for('resorts') }}" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <h3>Gyms</h3>
+                <p>Grow your gym membership with effective promotional strategies</p>
+                <a href="{{ url_for('gyms') }}" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-glass-cheers"></i>
+                </div>
+                <h3>Clubs & Pubs</h3>
+                <p>Increase footfall with engaging promotional content</p>
+                <a href="{{ url_for('clubs_pubs') }}" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-ring"></i>
+                </div>
+                <h3>Wedding Planning</h3>
+                <p>Showcase your wedding services to couples nationwide</p>
+                <a href="{{ url_for('wedding_planning') }}" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-concierge-bell"></i>
+                </div>
+                <h3>More Services</h3>
+                <p>Explore our complete range of hospitality solutions</p>
+                <a href="{{ url_for('services') }}" class="service-link">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="why-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Why Choose Radrush?</h2>
+            <p>Your success is our priority</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <h3>100% Free</h3>
+                <p>No hidden costs, completely free promotional services</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Proven Results</h3>
+                <p>Track record of successful campaigns across industries</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Expert Team</h3>
+                <p>Dedicated professionals with hospitality expertise</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Quick Turnaround</h3>
+                <p>Fast implementation and immediate results</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Grow Your Business?</h2>
+            <p>Join hundreds of hospitality businesses benefiting from our free promotional services</p>
+            <a href="{{ url_for('contact') }}" class="btn btn-primary">Get Started Today</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
