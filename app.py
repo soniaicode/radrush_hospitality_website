@@ -110,9 +110,16 @@ def contact():
                 'status': 'new'
             }
             
-            # Save to database
-            result = mongo.db.contacts.insert_one(contact_data)
-            app_logger.info(f"New contact saved to database - ID: {result.inserted_id}, Name: {name}, Email: {email}")
+            # Save to database (with error handling for MongoDB connection)
+            try:
+                if mongo.db is not None:
+                    result = mongo.db.contacts.insert_one(contact_data)
+                    app_logger.info(f"New contact saved to database - ID: {result.inserted_id}, Name: {name}, Email: {email}")
+                else:
+                    app_logger.warning(f"MongoDB not connected. Contact data not saved: {name} ({email})")
+            except Exception as db_error:
+                app_logger.error(f"Database error: {db_error}. Contact: {name} ({email})")
+                print(f"Database error: {db_error}")
             
             # Send email to admin
             try:
@@ -245,6 +252,9 @@ Email: radrushmarketing@gmail.com
 @app.route('/api/contacts', methods=['GET'])
 def get_contacts():
     try:
+        if mongo.db is None:
+            return jsonify({'success': False, 'error': 'Database not connected'}), 500
+        
         contacts = list(mongo.db.contacts.find().sort('created_at', -1))
         for contact in contacts:
             contact['_id'] = str(contact['_id'])
@@ -256,6 +266,9 @@ def get_contacts():
 @app.route('/api/stats', methods=['GET'])
 def get_stats():
     try:
+        if mongo.db is None:
+            return jsonify({'success': False, 'error': 'Database not connected'}), 500
+        
         total_contacts = mongo.db.contacts.count_documents({})
         new_contacts = mongo.db.contacts.count_documents({'status': 'new'})
         
@@ -305,6 +318,11 @@ def admin_logout():
 @login_required
 def admin_dashboard():
     try:
+        if mongo.db is None:
+            app_logger.error("MongoDB not connected")
+            flash('Database connection error. Please check configuration.', 'error')
+            return render_template('admin_dashboard.html', contacts=[], stats={'total': 0, 'today': 0, 'week': 0, 'month': 0})
+        
         # Get filter parameters
         from_date = request.args.get('from_date')
         to_date = request.args.get('to_date')
