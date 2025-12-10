@@ -1,11 +1,13 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
+from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session
 from flask_pymongo import PyMongo
 from flask_mail import Mail, Message
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import logging
 from logging.handlers import RotatingFileHandler
 from dotenv import load_dotenv
+from functools import wraps
+import hashlib
 
 load_dotenv()
 
@@ -37,6 +39,20 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_USERNAME')
 
 mongo = PyMongo(app)
 mail = Mail(app)
+
+# Admin credentials (stored securely)
+ADMIN_USERNAME = os.getenv('ADMIN_USERNAME', 'radrush_admin')
+ADMIN_PASSWORD_HASH = hashlib.sha256(os.getenv('ADMIN_PASSWORD', 'Radrush@2024').encode()).hexdigest()
+
+# Login required decorator
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'admin_logged_in' not in session:
+            flash('Please login to access admin dashboard', 'error')
+            return redirect(url_for('admin_login'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 # Home Route
 @app.route('/')
@@ -252,6 +268,86 @@ def get_stats():
         return jsonify({'success': True, 'stats': stats})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
+
+# Admin Login Route
+@app.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    if 'admin_logged_in' in session:
+        return redirect(url_for('admin_dashboard'))
+    
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        password_hash = hashlib.sha256(password.encode()).hexdigest()
+        
+        if username == ADMIN_USERNAME and password_hash == ADMIN_PASSWORD_HASH:
+            session['admin_logged_in'] = True
+            session['admin_username'] = username
+            app_logger.info(f"Admin login successful: {username}")
+            flash('Login successful!', 'success')
+            return redirect(url_for('admin_dashboard'))
+        else:
+            app_logger.warning(f"Failed login attempt for username: {username}")
+            flash('Invalid username or password', 'error')
+    
+    return render_template('admin_login.html')
+
+# Admin Logout Route
+@app.route('/admin/logout')
+def admin_logout():
+    session.pop('admin_logged_in', None)
+    session.pop('admin_username', None)
+    flash('Logged out successfully', 'success')
+    return redirect(url_for('admin_login'))
+
+# Admin Dashboard Route
+@app.route('/admin/dashboard')
+@login_required
+def admin_dashboard():
+    try:
+        # Get filter parameters
+        from_date = request.args.get('from_date')
+        to_date = request.args.get('to_date')
+        service_filter = request.args.get('service')
+        
+        # Build query
+        query = {}
+        
+        if from_date:
+            from_datetime = datetime.strptime(from_date, '%Y-%m-%d')
+            query['created_at'] = {'$gte': from_datetime}
+        
+        if to_date:
+            to_datetime = datetime.strptime(to_date, '%Y-%m-%d') + timedelta(days=1)
+            if 'created_at' in query:
+                query['created_at']['$lt'] = to_datetime
+            else:
+                query['created_at'] = {'$lt': to_datetime}
+        
+        if service_filter:
+            query['service'] = service_filter
+        
+        # Get contacts with filters
+        contacts = list(mongo.db.contacts.find(query).sort('created_at', -1))
+        
+        # Calculate stats
+        now = datetime.utcnow()
+        today_start = datetime(now.year, now.month, now.day)
+        week_start = now - timedelta(days=7)
+        month_start = datetime(now.year, now.month, 1)
+        
+        stats = {
+            'total': mongo.db.contacts.count_documents({}),
+            'today': mongo.db.contacts.count_documents({'created_at': {'$gte': today_start}}),
+            'week': mongo.db.contacts.count_documents({'created_at': {'$gte': week_start}}),
+            'month': mongo.db.contacts.count_documents({'created_at': {'$gte': month_start}})
+        }
+        
+        return render_template('admin_dashboard.html', contacts=contacts, stats=stats)
+    except Exception as e:
+        app_logger.error(f"Error loading admin dashboard: {e}")
+        flash('Error loading dashboard', 'error')
+        return render_template('admin_dashboard.html', contacts=[], stats={'total': 0, 'today': 0, 'week': 0, 'month': 0})
 
 # Error Handlers
 @app.errorhandler(404)
