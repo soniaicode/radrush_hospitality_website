@@ -15,7 +15,7 @@
             <div class="nav-wrapper">
                 <div class="logo">
                     <div class="logo-icon">
-                        <i class="fas fa-hotel"></i>
+                        <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Radrush Logo">
                     </div>
                     <div class="logo-text">
                         <span class="logo-title">Radrush</span>
@@ -23,10 +23,10 @@
                     </div>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>Home</a></li>
-                    <li><a href="{{ url_for('services') }}" {% if 'services' in request.endpoint %}class="active"{% endif %}>Services</a></li>
-                    <li><a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active"{% endif %}>About</a></li>
-                    <li><a href="{{ url_for('contact') }}" {% if request.endpoint == 'contact' %}class="active"{% endif %}>Contact</a></li>
+                    <li><a href="{{ url_for('index') }}" {% if request.endpoint and request.endpoint == 'index' %}class="active"{% endif %}>Home</a></li>
+                    <li><a href="{{ url_for('services') }}" {% if request.endpoint and 'services' in request.endpoint %}class="active"{% endif %}>Services</a></li>
+                    <li><a href="{{ url_for('about') }}" {% if request.endpoint and request.endpoint == 'about' %}class="active"{% endif %}>About</a></li>
+                    <li><a href="{{ url_for('contact') }}" {% if request.endpoint and request.endpoint == 'contact' %}class="active"{% endif %}>Contact</a></li>
                 </ul>
                 <div class="nav-cta">
                     <a href="{{ url_for('contact') }}" class="cta-button">
@@ -69,7 +69,7 @@
                     <div class="footer-col footer-about">
                         <div class="footer-logo">
                             <div class="logo-icon">
-                                <i class="fas fa-hotel"></i>
+                                <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Radrush Logo">
                             </div>
                             <div class="logo-text">
                                 <span class="logo-title">Radrush</span>
@@ -80,7 +80,7 @@
                         <div class="footer-contact">
                             <div class="contact-item-footer">
                                 <i class="fas fa-phone"></i>
-                                <span>7056456555</span>
+                                <span>7056456555 / 9271900007</span>
                             </div>
                             <div class="contact-item-footer">
                                 <i class="fas fa-envelope"></i>
@@ -145,6 +145,7 @@
     </footer>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/slider-simple.js') }}"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -284,3 +284,140 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log('Slider started with', slides.length, 'images');
 })();
+
+
+// ============================================
+// IMAGE SLIDER - AUTO CHANGE EVERY 3 SECONDS
+// ============================================
+(function() {
+    console.log('🎬 Initializing Image Slider...');
+    
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.dot');
+    const labels = document.querySelectorAll('.label-text');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    
+    if (!slides || slides.length === 0) {
+        console.log('❌ No slides found!');
+        return;
+    }
+    
+    console.log('✅ Found', slides.length, 'slides');
+    
+    let currentIndex = 0;
+    let autoSlideInterval;
+    
+    // Show specific slide
+    function showSlide(index) {
+        console.log('📸 Showing slide:', index + 1, 'of', slides.length);
+        
+        // Remove active from all
+        slides.forEach((s, i) => {
+            s.classList.remove('active');
+        });
+        
+        dots.forEach((d, i) => {
+            d.classList.remove('active');
+        });
+        
+        labels.forEach((l, i) => {
+            l.classList.remove('active');
+        });
+        
+        // Add active to current
+        slides[index].classList.add('active');
+        if (dots[index]) dots[index].classList.add('active');
+        if (labels[index]) labels[index].classList.add('active');
+        
+        currentIndex = index;
+    }
+    
+    // Next slide
+    function nextSlide() {
+        let next = (currentIndex + 1) % slides.length;
+        showSlide(next);
+    }
+    
+    // Previous slide
+    function prevSlide() {
+        let prev = (currentIndex - 1 + slides.length) % slides.length;
+        showSlide(prev);
+    }
+    
+    // Start auto slide - CHANGE EVERY 3 SECONDS
+    function startAutoSlide() {
+        stopAutoSlide();
+        console.log('▶️ Auto-slide started (3 seconds interval)');
+        autoSlideInterval = setInterval(() => {
+            nextSlide();
+        }, 3000); // 3 seconds = 3000 milliseconds
+    }
+    
+    // Stop auto slide
+    function stopAutoSlide() {
+        if (autoSlideInterval) {
+            clearInterval(autoSlideInterval);
+            console.log('⏸️ Auto-slide paused');
+        }
+    }
+    
+    // Button clicks
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            console.log('➡️ Next button clicked');
+            nextSlide();
+            stopAutoSlide();
+            startAutoSlide();
+        });
+    }
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            console.log('⬅️ Previous button clicked');
+            prevSlide();
+            stopAutoSlide();
+            startAutoSlide();
+        });
+    }
+    
+    // Dot clicks
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            console.log('🔵 Dot', index + 1, 'clicked');
+            showSlide(index);
+            stopAutoSlide();
+            startAutoSlide();
+        });
+    });
+    
+    // Label clicks
+    labels.forEach((label, index) => {
+        label.addEventListener('click', () => {
+            console.log('🏷️ Label', index + 1, 'clicked');
+            showSlide(index);
+            stopAutoSlide();
+            startAutoSlide();
+        });
+    });
+    
+    // Pause on hover
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        hero.addEventListener('mouseenter', () => {
+            stopAutoSlide();
+        });
+        
+        hero.addEventListener('mouseleave', () => {
+            startAutoSlide();
+        });
+    }
+    
+    // Initialize - Show first slide and start auto-play
+    console.log('🎬 Starting slider...');
+    showSlide(0);
+    startAutoSlide();
+    
+    console.log('✅ Slider initialized successfully!');
+    console.log('⏱️ Images will change every 3 seconds');
+})();
