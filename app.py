@@ -3,9 +3,25 @@ from flask_pymongo import PyMongo
 from flask_mail import Mail, Message
 from datetime import datetime
 import os
+import logging
+from logging.handlers import RotatingFileHandler
 from dotenv import load_dotenv
 
 load_dotenv()
+
+# Setup logging
+if not os.path.exists('logs'):
+    os.mkdir('logs')
+
+file_handler = RotatingFileHandler('logs/contact_submissions.log', maxBytes=10240000, backupCount=10)
+file_handler.setFormatter(logging.Formatter(
+    '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
+))
+file_handler.setLevel(logging.INFO)
+
+app_logger = logging.getLogger('radrush_app')
+app_logger.setLevel(logging.INFO)
+app_logger.addHandler(file_handler)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key-here')
@@ -79,7 +95,8 @@ def contact():
             }
             
             # Save to database
-            mongo.db.contacts.insert_one(contact_data)
+            result = mongo.db.contacts.insert_one(contact_data)
+            app_logger.info(f"New contact saved to database - ID: {result.inserted_id}, Name: {name}, Email: {email}")
             
             # Send email to admin
             try:
@@ -133,6 +150,7 @@ Submitted at: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC
                     """
                 )
                 mail.send(msg)
+                app_logger.info(f"Admin notification email sent to {admin_email} for contact from {name}")
                 
                 # Confirmation email to user
                 user_msg = Message(
@@ -190,14 +208,18 @@ Email: radrushmarketing@gmail.com
                     """
                 )
                 mail.send(user_msg)
+                app_logger.info(f"Confirmation email sent to user: {email}")
                 
             except Exception as email_error:
+                app_logger.error(f"Email sending error for {email}: {email_error}")
                 print(f"Email sending error: {email_error}")
                 # Continue even if email fails
             
             flash('Thank you for your message! We will get back to you soon.', 'success')
+            app_logger.info(f"Contact form submission completed successfully for {name} ({email})")
             return redirect(url_for('contact'))
         except Exception as e:
+            app_logger.error(f"Error processing contact form: {e}")
             flash('An error occurred. Please try again.', 'error')
             print(f"Error: {e}")
     
