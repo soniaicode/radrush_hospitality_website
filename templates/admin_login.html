@@ -5,65 +5,992 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Radrush Hospitality</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .login-container { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); width: 100%; max-width: 420px; }
-        .login-header { text-align: center; margin-bottom: 30px; }
-        .login-header i { font-size: 3.5rem; background: linear-gradient(135deg, #2563eb, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; }
-        .login-header h1 { font-size: 1.8rem; color: #1f2937; margin-bottom: 8px; font-weight: 700; }
-        .login-header p { color: #6b7280; font-size: 0.95rem; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; color: #374151; font-weight: 600; font-size: 0.9rem; }
-        .form-group input { width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.3s; background: #f9fafb; }
-        .form-group input:focus { outline: none; border-color: #2563eb; background: white; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
-        .login-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #2563eb, #3b82f6); color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
-        .login-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4); }
-        .login-btn:active { transform: translateY(0); }
-        .alert { padding: 14px 16px; margin-bottom: 20px; border-radius: 10px; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; }
-        .alert-error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
-        .alert-success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
-        .back-home { text-align: center; margin-top: 20px; }
-        .back-home a { color: #2563eb; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
-        .back-home a:hover { color: #1e40af; text-decoration: underline; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            overflow: hidden;
+            padding: 15px;
+        }
+
+        /* Two-sided container */
+        .split-container {
+            display: flex;
+            width: 100%;
+            max-width: 1450px;
+            height: 90vh;
+            min-height: 720px;
+            max-height: 920px;
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.5), 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Left side - Login Form */
+        .login-side {
+            flex: 0 0 45%;
+            padding: 45px 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #f9fafb 0%, #f1f5f9 100%);
+        }
+
+        /* Radrush Logo Section */
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 32px;
+            animation: fadeInDown 0.8s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .brand-logo-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+            overflow: hidden;
+        }
+
+        .brand-logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+
+        .brand-logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-logo-title {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #1e293b;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-logo-subtitle {
+            font-size: 0.75rem;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .login-header { 
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease-out 0.3s backwards;
+        }
+
+        /* Alerts container with fixed space */
+        .alerts-container {
+            min-height: 60px;
+            margin-bottom: 10px;
+        }
+        
+        .login-header h1 { 
+            font-size: 2.5rem; 
+            color: #0f172a; 
+            margin-bottom: 12px; 
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .login-header p { 
+            color: #64748b; 
+            font-size: 1.05rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        
+        .form-group { 
+            margin-bottom: 24px;
+            animation: fadeInUp 0.6s ease-out 0.3s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-group label { 
+            display: block; 
+            margin-bottom: 12px; 
+            color: #334155; 
+            font-weight: 600; 
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group label i {
+            color: #2563eb;
+            font-size: 0.9rem;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 1.15rem;
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+
+        .form-group input { 
+            width: 100%; 
+            padding: 17px 20px 17px 52px;
+            border: 2px solid #e2e8f0; 
+            border-radius: 12px; 
+            font-size: 1rem; 
+            transition: all 0.3s ease; 
+            background: #ffffff;
+            font-family: inherit;
+            color: #1e293b;
+            font-weight: 500;
+        }
+
+        .form-group input::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
+        }
+        
+        .form-group input:focus { 
+            outline: none; 
+            border-color: #2563eb; 
+            background: #ffffff; 
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12), 0 6px 16px rgba(37, 99, 235, 0.18);
+            transform: translateY(-2px);
+        }
+
+        .form-group input:focus ~ .input-icon {
+            color: #2563eb;
+            transform: translateY(-50%) scale(1.08);
+        }
+        
+        .login-btn { 
+            width: 100%; 
+            padding: 17px; 
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); 
+            color: white; 
+            border: none; 
+            border-radius: 12px; 
+            font-size: 1.05rem; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: all 0.35s ease; 
+            box-shadow: 0 8px 28px rgba(37, 99, 235, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 32px;
+            animation: fadeInUp 0.6s ease-out 0.4s backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .login-btn:hover::before {
+            left: 100%;
+        }
+        
+        .login-btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 12px 32px rgba(37, 99, 235, 0.5);
+        }
+        
+        .login-btn:active { 
+            transform: translateY(-1px); 
+        }
+
+        .login-btn i {
+            font-size: 1.15rem;
+        }
+        
+        .alert { 
+            padding: 14px 18px; 
+            margin-bottom: 18px; 
+            border-radius: 12px; 
+            font-size: 0.95rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 14px;
+            animation: slideDown 0.4s ease-out;
+            font-weight: 500;
+            position: relative;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+                max-height: 0;
+                margin-bottom: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                max-height: 100px;
+                margin-bottom: 18px;
+                padding-top: 14px;
+                padding-bottom: 14px;
+            }
+        }
+        
+        .alert-error { 
+            background: #fef2f2; 
+            color: #991b1b; 
+            border: 2px solid #fecaca;
+        }
+
+        .alert-error i {
+            font-size: 1.3rem;
+        }
+        
+        .alert-success { 
+            background: #f0fdf4; 
+            color: #166534; 
+            border: 2px solid #bbf7d0;
+        }
+
+        .alert-success i {
+            font-size: 1.3rem;
+        }
+        
+        .back-home { 
+            text-align: center; 
+            margin-top: 30px;
+            padding-top: 26px;
+            border-top: 2px solid #e2e8f0;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+        
+        .back-home a { 
+            color: #2563eb; 
+            text-decoration: none; 
+            font-size: 0.95rem; 
+            font-weight: 600; 
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            border-radius: 10px;
+        }
+        
+        .back-home a:hover { 
+            color: #1e40af;
+            background: rgba(37, 99, 235, 0.08);
+            transform: translateX(-3px);
+        }
+
+        .back-home a i {
+            transition: transform 0.3s;
+        }
+
+        .back-home a:hover i {
+            transform: translateX(-4px);
+        }
+
+        /* Security badge */
+        .security-badge {
+            text-align: center;
+            margin-top: 20px;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .security-badge i {
+            color: #10b981;
+            font-size: 1rem;
+        }
+
+        /* Right side - Image/Visual */
+        .visual-side {
+            flex: 0 0 55%;
+            position: relative;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            overflow: hidden;
+        }
+
+        .visual-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(2deg); }
+        }
+
+        .visual-content {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+            z-index: 2;
+        }
+
+        .visual-image-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out 0.5s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .visual-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .visual-image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .visual-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            color: white;
+            z-index: 3;
+            animation: slideUp 1s ease-out 0.8s backwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .visual-overlay h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .visual-overlay p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .welcome-badge {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 12px 24px;
+            border-radius: 100px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            z-index: 3;
+            animation: slideRight 0.8s ease-out 0.6s backwards;
+        }
+
+        @keyframes slideRight {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .welcome-badge i {
+            font-size: 1.1rem;
+        }
+        
+        /* Responsive Design */
+        
+        /* Tablet View */
+        @media (max-width: 1024px) {
+            body {
+                padding: 10px;
+                overflow-y: auto;
+            }
+
+            .split-container {
+                flex-direction: column;
+                height: auto;
+                max-height: none;
+                min-height: auto;
+                border-radius: 14px;
+            }
+
+            .login-side,
+            .visual-side {
+                flex: 1 1 auto;
+            }
+
+            .login-side {
+                padding: 40px 40px;
+                order: 2;
+            }
+
+            .visual-side {
+                min-height: 280px;
+                max-height: 350px;
+                order: 1;
+            }
+
+            .brand-logo {
+                margin-bottom: 24px;
+            }
+
+            .brand-logo-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .brand-logo-title {
+                font-size: 1.7rem;
+            }
+
+            .login-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .login-header p {
+                font-size: 1rem;
+            }
+
+            .alerts-container {
+                min-height: 50px;
+            }
+
+            .visual-content {
+                padding: 35px;
+            }
+
+            .visual-overlay {
+                padding: 30px;
+            }
+
+            .visual-overlay h2 {
+                font-size: 1.8rem;
+            }
+
+            .visual-overlay p {
+                font-size: 1rem;
+            }
+
+            .welcome-badge {
+                top: 25px;
+                left: 25px;
+            }
+        }
+
+        /* Mobile View - Large */
+        @media (max-width: 768px) {
+            body {
+                padding: 8px;
+            }
+
+            .split-container {
+                border-radius: 12px;
+            }
+
+            .login-side {
+                padding: 30px 25px;
+            }
+
+            .brand-logo {
+                margin-bottom: 20px;
+            }
+
+            .brand-logo-icon {
+                width: 46px;
+                height: 46px;
+            }
+
+            .brand-logo-title {
+                font-size: 1.5rem;
+            }
+
+            .brand-logo-subtitle {
+                font-size: 0.7rem;
+            }
+
+            .login-header {
+                margin-bottom: 16px;
+            }
+
+            .login-header h1 {
+                font-size: 1.9rem;
+            }
+
+            .login-header p {
+                font-size: 0.95rem;
+            }
+
+            .alerts-container {
+                min-height: 45px;
+                margin-bottom: 8px;
+            }
+
+            .alert {
+                padding: 12px 16px;
+                font-size: 0.9rem;
+                gap: 12px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
+
+            .form-group input {
+                padding: 15px 18px 15px 48px;
+                font-size: 0.95rem;
+            }
+
+            .input-icon {
+                font-size: 1.05rem;
+                left: 16px;
+            }
+
+            .login-btn {
+                padding: 15px;
+                font-size: 1rem;
+                margin-top: 24px;
+            }
+
+            .security-badge {
+                margin-top: 16px;
+                font-size: 0.8rem;
+            }
+
+            .back-home {
+                margin-top: 20px;
+                padding-top: 20px;
+            }
+
+            .back-home a {
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+
+            .visual-side {
+                min-height: 240px;
+                max-height: 300px;
+            }
+
+            .visual-content {
+                padding: 25px;
+            }
+
+            .visual-overlay {
+                padding: 25px;
+            }
+
+            .visual-overlay h2 {
+                font-size: 1.5rem;
+                margin-bottom: 8px;
+            }
+
+            .visual-overlay p {
+                font-size: 0.95rem;
+            }
+
+            .welcome-badge {
+                top: 20px;
+                left: 20px;
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Mobile View - Small */
         @media (max-width: 480px) {
-            .login-container { padding: 30px 20px; }
-            .login-header h1 { font-size: 1.5rem; }
-            .login-header i { font-size: 2.5rem; }
+            body {
+                padding: 5px;
+            }
+
+            .split-container {
+                border-radius: 10px;
+            }
+
+            .login-side {
+                padding: 25px 20px;
+            }
+
+            .brand-logo {
+                margin-bottom: 18px;
+                gap: 12px;
+            }
+
+            .brand-logo-icon {
+                width: 42px;
+                height: 42px;
+                border-radius: 12px;
+            }
+
+            .brand-logo-title {
+                font-size: 1.4rem;
+            }
+
+            .brand-logo-subtitle {
+                font-size: 0.65rem;
+                letter-spacing: 1.5px;
+            }
+
+            .login-header {
+                margin-bottom: 14px;
+            }
+
+            .login-header h1 {
+                font-size: 1.7rem;
+                margin-bottom: 8px;
+            }
+
+            .login-header p {
+                font-size: 0.9rem;
+            }
+
+            .alerts-container {
+                min-height: 40px;
+                margin-bottom: 6px;
+            }
+
+            .alert {
+                padding: 10px 14px;
+                font-size: 0.85rem;
+                gap: 10px;
+                margin-bottom: 12px;
+            }
+
+            .alert i {
+                font-size: 1.1rem !important;
+            }
+
+            .form-group {
+                margin-bottom: 18px;
+            }
+
+            .form-group label {
+                font-size: 0.85rem;
+                margin-bottom: 8px;
+                gap: 6px;
+            }
+
+            .form-group label i {
+                font-size: 0.8rem;
+            }
+
+            .form-group input {
+                padding: 14px 16px 14px 44px;
+                font-size: 0.9rem;
+                border-radius: 10px;
+            }
+
+            .input-icon {
+                font-size: 1rem;
+                left: 14px;
+            }
+
+            .login-btn {
+                padding: 14px;
+                font-size: 0.95rem;
+                margin-top: 20px;
+                border-radius: 10px;
+                gap: 10px;
+            }
+
+            .login-btn i {
+                font-size: 1rem;
+            }
+
+            .security-badge {
+                margin-top: 14px;
+                font-size: 0.75rem;
+                gap: 6px;
+            }
+
+            .security-badge i {
+                font-size: 0.9rem;
+            }
+
+            .back-home {
+                margin-top: 18px;
+                padding-top: 18px;
+            }
+
+            .back-home a {
+                font-size: 0.85rem;
+                padding: 8px 14px;
+                gap: 8px;
+            }
+
+            .visual-side {
+                min-height: 200px;
+                max-height: 250px;
+            }
+
+            .visual-content {
+                padding: 20px;
+            }
+
+            .visual-image-wrapper {
+                border-radius: 14px;
+            }
+
+            .visual-overlay {
+                padding: 20px;
+            }
+
+            .visual-overlay h2 {
+                font-size: 1.3rem;
+                margin-bottom: 6px;
+            }
+
+            .visual-overlay p {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+
+            .welcome-badge {
+                top: 15px;
+                left: 15px;
+                padding: 8px 16px;
+                font-size: 0.8rem;
+                gap: 8px;
+            }
+
+            .welcome-badge i {
+                font-size: 1rem;
+            }
+        }
+
+        /* Mobile View - Extra Small */
+        @media (max-width: 360px) {
+            .login-side {
+                padding: 20px 16px;
+            }
+
+            .brand-logo-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            .brand-logo-title {
+                font-size: 1.3rem;
+            }
+
+            .login-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .login-header p {
+                font-size: 0.85rem;
+            }
+
+            .form-group input {
+                padding: 12px 14px 12px 42px;
+                font-size: 0.85rem;
+            }
+
+            .login-btn {
+                padding: 13px;
+                font-size: 0.9rem;
+            }
+
+            .visual-side {
+                min-height: 180px;
+                max-height: 220px;
+            }
+
+            .visual-overlay h2 {
+                font-size: 1.2rem;
+            }
+
+            .visual-overlay p {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <i class="fas fa-user-shield"></i>
-            <h1>Admin Login</h1>
-            <p>Radrush Hospitality Dashboard</p>
+    <div class="split-container">
+        <!-- Left Side - Login Form -->
+        <div class="login-side">
+            <!-- Radrush Brand Logo -->
+            <div class="brand-logo">
+                <div class="brand-logo-icon">
+                    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Radrush Logo">
+                </div>
+                <div class="brand-logo-text">
+                    <span class="brand-logo-title">Radrush</span>
+                    <span class="brand-logo-subtitle">Hospitality</span>
+                </div>
+            </div>
+
+            <div class="login-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to access your admin dashboard</p>
+            </div>
+            
+            <div class="alerts-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                <i class="fas fa-{% if category == 'error' %}exclamation-circle{% else %}check-circle{% endif %}"></i>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            
+            <form method="POST" action="{{ url_for('admin_login') }}">
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fas fa-user"></i> Username
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" id="username" name="username" required autofocus placeholder="Enter your username">
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="password" required placeholder="Enter your password">
+                        <i class="fas fa-lock input-icon"></i>
+                    </div>
+                </div>
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+                </button>
+            </form>
+
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i>
+                <span>Secure SSL Connection</span>
+            </div>
+
+            <div class="back-home">
+                <a href="{{ url_for('index') }}">
+                    <i class="fas fa-arrow-left"></i> Back to Website
+                </a>
+            </div>
         </div>
-        
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        
-        <form method="POST" action="{{ url_for('admin_login') }}">
-            <div class="form-group">
-                <label for="username"><i class="fas fa-user"></i> Username</label>
-                <input type="text" id="username" name="username" required autofocus>
+
+        <!-- Right Side - Visual/Image -->
+        <div class="visual-side">
+            <div class="welcome-badge">
+                <i class="fas fa-shield-halved"></i>
+                Admin Portal
             </div>
-            <div class="form-group">
-                <label for="password"><i class="fas fa-lock"></i> Password</label>
-                <input type="password" id="password" name="password" required>
+            <div class="visual-content">
+                <div class="visual-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/admin_hero.jpg') }}" alt="Luxury Hospitality">
+                    <div class="visual-overlay">
+                        <h2>Excellence in Hospitality</h2>
+                        <p>Manage your premium hotel services with our advanced admin dashboard</p>
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="login-btn">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </button>
-        </form>
-        <div class="back-home">
-            <a href="{{ url_for('index') }}"><i class="fas fa-arrow-left"></i> Back to Website</a>
         </div>
     </div>
 </body>
