@@ -147,8 +147,26 @@
         </div>
     </footer>
 
+    <script src="{{ url_for('static', filename='js/mobile-menu.js') }}"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static', filename='js/slider-simple.js') }}"></script>
+    
+    <!-- Debug Script -->
+    <script>
+        console.log('🔍 Debug: Checking hamburger on page load');
+        window.addEventListener('load', function() {
+            const hamburger = document.querySelector('.hamburger');
+            if (hamburger) {
+                console.log('✅ Hamburger found on page');
+                console.log('Hamburger display:', window.getComputedStyle(hamburger).display);
+                console.log('Hamburger z-index:', window.getComputedStyle(hamburger).zIndex);
+                console.log('Hamburger position:', window.getComputedStyle(hamburger).position);
+            } else {
+                console.error('❌ Hamburger NOT found on page');
+            }
+        });
+    </script>
+    
     {% block extra_js %}{% endblock %}
 </body>
 </html>
