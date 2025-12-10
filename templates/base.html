@@ -29,6 +29,9 @@
                     <li><a href="{{ url_for('contact') }}" {% if request.endpoint and request.endpoint == 'contact' %}class="active"{% endif %}>Contact</a></li>
                 </ul>
                 <div class="nav-cta">
+                    <a href="{{ url_for('admin_login') }}" class="admin-button" title="Admin Login">
+                        <i class="fas fa-user-shield"></i>
+                    </a>
                     <a href="{{ url_for('contact') }}" class="cta-button">
                         <i class="fas fa-phone-alt"></i> Contact Us
                     </a>
