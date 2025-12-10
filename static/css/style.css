@@ -257,6 +257,13 @@ body {
         justify-content: center;
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+    
+    .hamburger span {
+        background: var(--text-dark) !important;
+        opacity: 1 !important;
     }
 }
 
