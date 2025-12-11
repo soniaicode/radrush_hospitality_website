@@ -129,8 +129,8 @@ def contact():
                 from threading import Thread
                 import socket
                 
-                def send_async_email(app, msg, recipient_type):
-                    with app.app_context():
+                def send_async_email(flask_app, msg, recipient_type):
+                    with flask_app.app_context():
                         try:
                             # Set socket timeout for SMTP
                             socket.setdefaulttimeout(15)
@@ -200,8 +200,8 @@ Email: radrushmarketing@gmail.com
                 )
                 
                 # Send emails in background threads to avoid blocking
-                Thread(target=send_async_email, args=(app._get_current_object(), msg, 'admin')).start()
-                Thread(target=send_async_email, args=(app._get_current_object(), user_msg, 'user')).start()
+                Thread(target=send_async_email, args=(app, msg, 'admin')).start()
+                Thread(target=send_async_email, args=(app, user_msg, 'user')).start()
                 
                 app_logger.info(f"Emails queued for sending - Admin: {admin_email}, User: {email}")
                 
