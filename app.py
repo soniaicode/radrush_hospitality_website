@@ -133,25 +133,29 @@ def contact():
                     with flask_app.app_context():
                         try:
                             # Set socket timeout for SMTP
-                            socket.setdefaulttimeout(15)
+                            socket.setdefaulttimeout(10)
                             print(f"[DEBUG] Sending {recipient_type} email to {msg.recipients}...")
                             mail.send(msg)
                             print(f"[SUCCESS] {recipient_type} email sent to {msg.recipients}")
                             app_logger.info(f"✅ Email sent successfully to {recipient_type}: {msg.recipients}")
+                        except socket.error as e:
+                            # Network errors (common on Render free tier)
+                            print(f"[WARNING] {recipient_type} email failed - Network issue: {str(e)}")
+                            app_logger.warning(f"⚠️ Email service unavailable ({recipient_type}): {str(e)}")
                         except Exception as e:
                             print(f"[ERROR] {recipient_type} email failed: {str(e)}")
                             app_logger.error(f"❌ Async email error ({recipient_type}): {str(e)}")
-                            import traceback
-                            app_logger.error(f"Traceback: {traceback.format_exc()}")
                 
-                admin_email = os.getenv('ADMIN_EMAIL', 'radrushmarketing@gmail.com')
-                submitted_at = datetime.utcnow().strftime('%B %d, %Y at %I:%M %p')
-                
-                # Email to admin - Using template
-                msg = Message(
-                    subject=f'🔔 New Contact: {name} - Radrush Hospitality',
-                    recipients=[admin_email],
-                    body=f"""
+                # Check if email service is configured
+                if os.getenv('MAIL_USERNAME') and os.getenv('MAIL_PASSWORD'):
+                    admin_email = os.getenv('ADMIN_EMAIL', 'radrushmarketing@gmail.com')
+                    submitted_at = datetime.utcnow().strftime('%B %d, %Y at %I:%M %p')
+                    
+                    # Email to admin - Using template
+                    msg = Message(
+                        subject=f'🔔 New Contact: {name} - Radrush Hospitality',
+                        recipients=[admin_email],
+                        body=f"""
 New Contact Form Submission
 
 Name: {name}
@@ -163,21 +167,21 @@ Message:
 {message}
 
 Submitted at: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC
-                    """,
-                    html=render_template('emails/admin_notification.html',
-                                       name=name,
-                                       email=email,
-                                       phone=phone,
-                                       service=service,
-                                       message=message,
-                                       submitted_at=submitted_at)
-                )
-                
-                # Confirmation email to user - Using template
-                user_msg = Message(
-                    subject='Thank you for contacting Radrush Hospitality',
-                    recipients=[email],
-                    body=f"""
+                        """,
+                        html=render_template('emails/admin_notification.html',
+                                           name=name,
+                                           email=email,
+                                           phone=phone,
+                                           service=service,
+                                           message=message,
+                                           submitted_at=submitted_at)
+                    )
+                    
+                    # Confirmation email to user - Using template
+                    user_msg = Message(
+                        subject='Thank you for contacting Radrush Hospitality',
+                        recipients=[email],
+                        body=f"""
 Dear {name},
 
 Thank you for reaching out to Radrush Hospitality!
@@ -194,20 +198,23 @@ Best regards,
 Radrush Hospitality Team
 Phone: 7056456555 / 9271900007
 Email: radrushmarketing@gmail.com
-                    """,
-                    html=render_template('emails/user_confirmation.html',
-                                       name=name,
-                                       email=email,
-                                       phone=phone,
-                                       service=service,
-                                       submitted_at=submitted_at)
-                )
-                
-                # Send emails in background threads to avoid blocking
-                Thread(target=send_async_email, args=(app, msg, 'admin')).start()
-                Thread(target=send_async_email, args=(app, user_msg, 'user')).start()
-                
-                app_logger.info(f"Emails queued for sending - Admin: {admin_email}, User: {email}")
+                        """,
+                        html=render_template('emails/user_confirmation.html',
+                                           name=name,
+                                           email=email,
+                                           phone=phone,
+                                           service=service,
+                                           submitted_at=submitted_at)
+                    )
+                    
+                    # Send emails in background threads to avoid blocking
+                    Thread(target=send_async_email, args=(app, msg, 'admin')).start()
+                    Thread(target=send_async_email, args=(app, user_msg, 'user')).start()
+                    
+                    app_logger.info(f"Emails queued for sending - Admin: {admin_email}, User: {email}")
+                else:
+                    app_logger.warning("Email service not configured - skipping email notifications")
+                    print("[WARNING] Email service not configured")
                 
             except Exception as email_error:
                 app_logger.error(f"Email sending error for {email}: {email_error}")
