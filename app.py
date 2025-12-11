@@ -340,7 +340,7 @@ Email: radrushmarketing@gmail.com
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh;">
     <table width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px;">
         <tr>
             <td align="center">
@@ -420,50 +420,50 @@ Email: radrushmarketing@gmail.com
                         <td style="padding: 0 30px 40px;">
                             <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 30px; text-align: center; color: white;">
                                 <h3 style="margin: 0 0 20px; font-size: 20px; font-weight: 700;">Need Immediate Assistance?</h3>
-                                <p style="margin: 0 0 20px; font-size: 15px; opacity: 0.95;">Feel free to reach out to u
-                       
-                                <ta">
+                                <p style="margin: 0 0 20px; font-size: 15px; opacity: 0.95;">Feel free to reach out to us directly:</p>
+                                
+                                <table width="100%" cellpadding="10" cellspacing="0" style="margin-bottom: 20px;">
                                     <tr>
-                >
-                                            
-                                                <p style="margin: 0; font-size: 14pe</p>
-                                                <p style="ma</p>
-                                            </
-            td>
+                                        <td align="center">
+                                            <div style="background: rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 12px; display: inline-block;">
+                                                <p style="margin: 0 0 5px; font-size: 14px; opacity: 0.9;">📞 Phone</p>
+                                                <p style="margin: 0; font-size: 16px; font-weight: 700;">7056456555 / 9271900007</p>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td ali">
-                              ">
-                                                <p style="margin: 0Email</p>
-                                                <p style="margin: il.com</p>
-                                iv>
-    >
+                                        <td align="center">
+                                            <div style="background: rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 12px; display: inline-block;">
+                                                <p style="margin: 0 0 5px; font-size: 14px; opacity: 0.9;">📧 Email</p>
+                                                <p style="margin: 0; font-size: 16px; font-weight: 700;">radrushmarketing@gmail.com</p>
+                                            </div>
+                                        </td>
                                     </tr>
-/table>
+                                </table>
                             </div>
                         </td>
-                   </tr>
-                
-                    <!-- Foo
-                    <tr>
-        >
-                            <p style="margin: 0 0 10px; color: #1a1a1a; 
-                                s,<br>
-                                <span style="col>
-                            </p>
-                            <p style="margin: 15px 0 0; color: px;">
-                          
-                            </p>
- </td>
                     </tr>
-                
-        >
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background: #f8f9fa; padding: 30px; text-align: center; border-top: 1px solid #e0e0e0;">
+                            <p style="margin: 0 0 10px; color: #1a1a1a; font-size: 16px; font-weight: 700;">
+                                Best regards,<br>
+                                <span style="color: #667eea;">Radrush Hospitality Team</span>
+                            </p>
+                            <p style="margin: 15px 0 0; color: #999; font-size: 12px;">
+                                © 2024 Radrush Hospitality. All rights reserved.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                </table>
             </td>
         </tr>
-    </tae>
+    </table>
 </body>
 </html>
-        """            blable/t        <                           eserved.rights rality. All drush Hospit   © 2024 Ra   : 12ont-size99; f#9 Team</spanlityush Hospita">Radr #667eea;r:oBest regard">ght: 700; font-wei 16px;font-size:;" #e0e0e0 solidr-top: 1pxter; borde-align: cenx; textg: 30pddinpa9fa; und: #f8fbackgrostyle=" <td                ->ter -               <                      /td <                                    </d           ng@gmarketiradrushmaht: 700;">nt-weig: 16px; font-size 0 0; fo5px0.9;">📧 ty: ci; opaze: 14px; font-si 5px;argin:e-block; mlindisplay: in; ing: 15px: 12px; paddr-radius borde5,0.2);25,255,(255baground: rg="back style      <div        centergn="        </                    iv>d0007719055 / 92>70564565 700;"-weight:x; fontnt-size: 16p0; foin: 5px 0 rg📞 Phony: 0.9;">it; opacx 5px;">in:margline-block; : insplaydi; ng: 15pxddi: 12px; paiusad border-r2);,255,255,0.gba(255nd: rbackgrouyle="<div str""centetd align=      <                  pacing="0lls0" cedding="1" cellpadth="100%ble wi         </p>ly:s direct
+                    """
                 )
                 mail.send(user_msg)
                 app_logger.info(f"Confirmation email sent to user: {email}")
