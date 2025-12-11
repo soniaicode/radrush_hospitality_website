@@ -220,6 +220,19 @@ Email: radrushmarketing@gmail.com
     
     return render_template('contact.html')
 
+# Debug route to check email config (remove in production)
+@app.route('/api/email-config-check')
+def email_config_check():
+    config_status = {
+        'MAIL_SERVER': 'SET' if os.getenv('MAIL_SERVER') else 'MISSING',
+        'MAIL_PORT': 'SET' if os.getenv('MAIL_PORT') else 'MISSING',
+        'MAIL_USERNAME': 'SET' if os.getenv('MAIL_USERNAME') else 'MISSING',
+        'MAIL_PASSWORD': 'SET' if os.getenv('MAIL_PASSWORD') else 'MISSING',
+        'ADMIN_EMAIL': 'SET' if os.getenv('ADMIN_EMAIL') else 'MISSING',
+        'MAIL_USE_TLS': os.getenv('MAIL_USE_TLS', 'NOT SET')
+    }
+    return jsonify(config_status)
+
 # API Routes for Admin/Dashboard (Optional)
 @app.route('/api/contacts', methods=['GET'])
 def get_contacts():
