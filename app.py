@@ -33,11 +33,12 @@ app.config['MONGO_URI'] = os.getenv('MONGO_URI', 'mongodb://localhost:27017/radr
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
 app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
 app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'True') == 'True'
+app.config['MAIL_USE_SSL'] = False
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_USERNAME')
-app.config['MAIL_CONNECT_TIMEOUT'] = 10  # Connection timeout
-app.config['MAIL_TIMEOUT'] = 10  # Send timeout
+app.config['MAIL_MAX_EMAILS'] = None
+app.config['MAIL_ASCII_ATTACHMENTS'] = False
 
 mongo = PyMongo(app)
 mail = Mail(app)
@@ -126,13 +127,19 @@ def contact():
             # Send email to admin (with timeout protection)
             try:
                 from threading import Thread
+                import socket
                 
-                def send_async_email(app, msg):
+                def send_async_email(app, msg, recipient_type):
                     with app.app_context():
                         try:
+                            # Set socket timeout for SMTP
+                            socket.setdefaulttimeout(15)
                             mail.send(msg)
+                            app_logger.info(f"Email sent successfully to {recipient_type}: {msg.recipients}")
                         except Exception as e:
-                            app_logger.error(f"Async email error: {e}")
+                            app_logger.error(f"Async email error ({recipient_type}): {str(e)}")
+                            import traceback
+                            app_logger.error(f"Traceback: {traceback.format_exc()}")
                 
                 admin_email = os.getenv('ADMIN_EMAIL', 'radrushmarketing@gmail.com')
                 submitted_at = datetime.utcnow().strftime('%B %d, %Y at %I:%M %p')
@@ -193,10 +200,10 @@ Email: radrushmarketing@gmail.com
                 )
                 
                 # Send emails in background threads to avoid blocking
-                Thread(target=send_async_email, args=(app._get_current_object(), msg)).start()
-                Thread(target=send_async_email, args=(app._get_current_object(), user_msg)).start()
+                Thread(target=send_async_email, args=(app._get_current_object(), msg, 'admin')).start()
+                Thread(target=send_async_email, args=(app._get_current_object(), user_msg, 'user')).start()
                 
-                app_logger.info(f"Emails queued for sending to {admin_email} and {email}")
+                app_logger.info(f"Emails queued for sending - Admin: {admin_email}, User: {email}")
                 
             except Exception as email_error:
                 app_logger.error(f"Email sending error for {email}: {email_error}")
