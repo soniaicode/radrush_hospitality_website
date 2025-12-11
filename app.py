@@ -124,8 +124,9 @@ def contact():
             # Send email to admin
             try:
                 admin_email = os.getenv('ADMIN_EMAIL', 'radrushmarketing@gmail.com')
+                submitted_at = datetime.utcnow().strftime('%B %d, %Y at %I:%M %p')
                 
-                # Email to admin - Professional Gmail-Compatible Template
+                # Email to admin - Using template
                 msg = Message(
                     subject=f'🔔 New Contact: {name} - Radrush Hospitality',
                     recipients=[admin_email],
@@ -142,163 +143,18 @@ Message:
 
 Submitted at: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC
                     """,
-                    html=f"""
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="margin:0;padding:0;font-family:Arial,sans-serif;background-color:#f4f4f4;">
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#667eea;padding:20px 0;">
-        <tr>
-            <td align="center">
-                <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.1);">
-                    
-                    <!-- Header -->
-                    <tr>
-                        <td style="background-color:#667eea;padding:30px;text-align:center;">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td align="center">
-                                        <div style="background-color:#ffffff;width:70px;height:70px;border-radius:50%;margin:0 auto 15px;line-height:70px;text-align:center;">
-                                            <span style="font-size:35px;">📧</span>
-                                        </div>
-                                        <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:bold;">Radrush Hospitality</h1>
-                                        <p style="margin:10px 0 0;color:#ffffff;font-size:14px;opacity:0.9;">New Contact Inquiry</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    
-                    <!-- Alert Badge -->
-                    <tr>
-                        <td style="padding:25px 30px 10px;">
-                            <table cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="background-color:#f5576c;color:#ffffff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:bold;">
-                                        🔔 New Lead Alert
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    
-                    <!-- Contact Details -->
-                    <tr>
-                        <td style="padding:20px 30px;">
-                            
-                            <!-- Name -->
-                            <table width="100%" cellpadding="15" cellspacing="0" border="0" style="background-color:#f5f7fa;border-radius:8px;margin-bottom:12px;">
-                                <tr>
-                                    <td width="40" style="vertical-align:middle;">
-                                        <span style="font-size:24px;">👤</span>
-                                    </td>
-                                    <td style="vertical-align:middle;">
-                                        <p style="margin:0;font-size:11px;color:#666;font-weight:bold;text-transform:uppercase;">Full Name</p>
-                                        <p style="margin:3px 0 0;font-size:16px;color:#1a1a1a;font-weight:bold;">{name}</p>
-                                    </td>
-                                </tr>
-                            </table>
-                            
-                            <!-- Email -->
-                            <table width="100%" cellpadding="15" cellspacing="0" border="0" style="background-color:#fff3e0;border-radius:8px;margin-bottom:12px;">
-                                <tr>
-                                    <td width="40" style="vertical-align:middle;">
-                                        <span style="font-size:24px;">📧</span>
-                                    </td>
-                                    <td style="vertical-align:middle;">
-                                        <p style="margin:0;font-size:11px;color:#666;font-weight:bold;text-transform:uppercase;">Email Address</p>
-                                        <p style="margin:3px 0 0;font-size:15px;color:#1a1a1a;font-weight:600;"><a href="mailto:{email}" style="color:#f5576c;text-decoration:none;">{email}</a></p>
-                                    </td>
-                                </tr>
-                            </table>
-                            
-                            <!-- Phone -->
-                            <table width="100%" cellpadding="15" cellspacing="0" border="0" style="background-color:#e0f7fa;border-radius:8px;margin-bottom:12px;">
-                                <tr>
-                                    <td width="40" style="vertical-align:middle;">
-                                        <span style="font-size:24px;">📱</span>
-                                    </td>
-                                    <td style="vertical-align:middle;">
-                                        <p style="margin:0;font-size:11px;color:#666;font-weight:bold;text-transform:uppercase;">Phone Number</p>
-                                        <p style="margin:3px 0 0;font-size:16px;color:#1a1a1a;font-weight:bold;">{phone or 'Not provided'}</p>
-                                    </td>
-                                </tr>
-                            </table>
-                            
-                            <!-- Service -->
-                            <table width="100%" cellpadding="15" cellspacing="0" border="0" style="background-color:#fce4ec;border-radius:8px;margin-bottom:15px;">
-                                <tr>
-                                    <td width="40" style="vertical-align:middle;">
-                                        <span style="font-size:24px;">🎯</span>
-                                    </td>
-                                    <td style="vertical-align:middle;">
-                                        <p style="margin:0;font-size:11px;color:#666;font-weight:bold;text-transform:uppercase;">Service Interested</p>
-                                        <p style="margin:3px 0 0;font-size:16px;color:#1a1a1a;font-weight:bold;">{service or 'Not specified'}</p>
-                                    </td>
-                                </tr>
-                            </table>
-                            
-                            <!-- Message -->
-                            <table width="100%" cellpadding="20" cellspacing="0" border="0" style="background-color:#667eea;border-radius:8px;">
-                                <tr>
-                                    <td>
-                                        <p style="margin:0 0 12px;font-size:12px;color:#ffffff;font-weight:bold;text-transform:uppercase;">💬 Message</p>
-                                        <table width="100%" cellpadding="15" cellspacing="0" border="0" style="background-color:#ffffff;border-radius:6px;border-left:4px solid #f5576c;">
-                                            <tr>
-                                                <td>
-                                                    <p style="margin:0;color:#333;font-size:15px;line-height:1.6;">{message}</p>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                            
-                        </td>
-                    </tr>
-                    
-                    <!-- Reply Button -->
-                    <tr>
-                        <td style="padding:10px 30px 30px;text-align:center;">
-                            <table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
-                                <tr>
-                                    <td style="background-color:#f5576c;border-radius:25px;text-align:center;">
-                                        <a href="mailto:{email}" style="display:inline-block;color:#ffffff;padding:14px 35px;text-decoration:none;font-weight:bold;font-size:15px;">
-                                            📧 Reply to {name.split()[0] if name else 'Contact'}
-                                        </a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    
-                    <!-- Footer -->
-                    <tr>
-                        <td style="background-color:#f8f9fa;padding:25px;text-align:center;border-top:1px solid #e0e0e0;">
-                            <p style="margin:0 0 8px;color:#666;font-size:12px;">
-                                ⏰ Submitted: {datetime.utcnow().strftime('%B %d, %Y at %I:%M %p')} UTC
-                            </p>
-                            <p style="margin:0;color:#999;font-size:11px;">
-                                &copy; 2024 Radrush Hospitality. All rights reserved.
-                            </p>
-                        </td>
-                    </tr>
-                    
-                </table>
-            </td>
-        </tr>
-    </table>
-</body>
-</html>
-                    """
+                    html=render_template('emails/admin_notification.html',
+                                       name=name,
+                                       email=email,
+                                       phone=phone,
+                                       service=service,
+                                       message=message,
+                                       submitted_at=submitted_at)
                 )
                 mail.send(msg)
                 app_logger.info(f"Admin notification email sent to {admin_email} for contact from {name}")
                 
-                # Confirmation email to user
+                # Confirmation email to user - Using template
                 user_msg = Message(
                     subject='Thank you for contacting Radrush Hospitality',
                     recipients=[email],
@@ -320,137 +176,11 @@ Radrush Hospitality Team
 Phone: 7056456555 / 9271900007
 Email: radrushmarketing@gmail.com
                     """,
-                    html=f"""
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh;">
-    <table width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px;">
-        <tr>
-            <td align="center">
-                <!-- Main Container -->
-                <table width="600" cellpadding="0" cellspacing="0" style="background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; max-width: 100%;">
-                    
-                    <!-- Header -->
-                    <tr>
-                        <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 50px 30px; text-align: center;">
-                            <div style="background: white; width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 25px; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 15px 40px rgba(0,0,0,0.2);">
-                                <span style="font-size: 50px;">✅</span>
-                            </div>
-                            <h1 style="margin: 0; color: white; font-size: 36px; font-weight: 800; letter-spacing: -0.5px;">Thank You!</h1>
-                            <p style="margin: 15px 0 0; color: rgba(255,255,255,0.95); font-size: 18px; font-weight: 500;">We've received your message</p>
-                        </td>
-                    </tr>
-                    
-                    <!-- Welcome Message -->
-                    <tr>
-                        <td style="padding: 40px 30px 30px;">
-                            <h2 style="margin: 0 0 20px; color: #1a1a1a; font-size: 24px; font-weight: 700;">Dear {name},</h2>
-                            <p style="margin: 0 0 20px; color: #555; font-size: 16px; line-height: 1.8;">
-                                Thank you for reaching out to <strong style="color: #667eea;">Radrush Hospitality</strong>! 
-                                We're excited to connect with you and learn more about how we can help elevate your hospitality business.
-                            </p>
-                            <p style="margin: 0; color: #555; font-size: 16px; line-height: 1.8;">
-                                Our team will review your inquiry and get back to you within <strong style="color: #f5576c;">24 hours</strong>.
-                            </p>
-                        </td>
-                    </tr>
-                    
-                    <!-- Submission Details -->
-                    <tr>
-                        <td style="padding: 0 30px 30px;">
-                            <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; padding: 25px; border-left: 5px solid #667eea;">
-                                <h3 style="margin: 0 0 20px; color: #667eea; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">📋 Your Submission Details</h3>
-                                
-                                <table width="100%" cellpadding="8" cellspacing="0">
-                                    <tr>
-                                        <td style="color: #666; font-size: 14px; font-weight: 600; width: 140px;">Name:</td>
-                                        <td style="color: #1a1a1a; font-size: 15px; font-weight: 700;">{name}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="color: #666; font-size: 14px; font-weight: 600;">Email:</td>
-                                        <td style="color: #667eea; font-size: 15px; font-weight: 600;">{email}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="color: #666; font-size: 14px; font-weight: 600;">Phone:</td>
-                                        <td style="color: #1a1a1a; font-size: 15px; font-weight: 700;">{phone or 'Not provided'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="color: #666; font-size: 14px; font-weight: 600;">Service:</td>
-                                        <td style="color: #1a1a1a; font-size: 15px; font-weight: 700;">{service or 'Not specified'}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- What's Next Section -->
-                    <tr>
-                        <td style="padding: 0 30px 30px;">
-                            <div style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); border-radius: 15px; padding: 25px;">
-                                <h3 style="margin: 0 0 15px; color: #d35400; font-size: 18px; font-weight: 700;">🚀 What Happens Next?</h3>
-                                <ul style="margin: 0; padding-left: 20px; color: #555; font-size: 15px; line-height: 2;">
-                                    <li>Our team reviews your inquiry</li>
-                                    <li>We'll contact you within 24 hours</li>
-                                    <li>Discuss your specific needs</li>
-                                    <li>Create a customized solution for you</li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- Contact Information -->
-                    <tr>
-                        <td style="padding: 0 30px 40px;">
-                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 30px; text-align: center; color: white;">
-                                <h3 style="margin: 0 0 20px; font-size: 20px; font-weight: 700;">Need Immediate Assistance?</h3>
-                                <p style="margin: 0 0 20px; font-size: 15px; opacity: 0.95;">Feel free to reach out to us directly:</p>
-                                
-                                <table width="100%" cellpadding="10" cellspacing="0" style="margin-bottom: 20px;">
-                                    <tr>
-                                        <td align="center">
-                                            <div style="background: rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 12px; display: inline-block;">
-                                                <p style="margin: 0 0 5px; font-size: 14px; opacity: 0.9;">📞 Phone</p>
-                                                <p style="margin: 0; font-size: 16px; font-weight: 700;">7056456555 / 9271900007</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">
-                                            <div style="background: rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 12px; display: inline-block;">
-                                                <p style="margin: 0 0 5px; font-size: 14px; opacity: 0.9;">📧 Email</p>
-                                                <p style="margin: 0; font-size: 16px; font-weight: 700;">radrushmarketing@gmail.com</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- Footer -->
-                    <tr>
-                        <td style="background: #f8f9fa; padding: 30px; text-align: center; border-top: 1px solid #e0e0e0;">
-                            <p style="margin: 0 0 10px; color: #1a1a1a; font-size: 16px; font-weight: 700;">
-                                Best regards,<br>
-                                <span style="color: #667eea;">Radrush Hospitality Team</span>
-                            </p>
-                            <p style="margin: 15px 0 0; color: #999; font-size: 12px;">
-                                © 2024 Radrush Hospitality. All rights reserved.
-                            </p>
-                        </td>
-                    </tr>
-                    
-                </table>
-            </td>
-        </tr>
-    </table>
-</body>
-</html>
-                    """
+                    html=render_template('emails/user_confirmation.html',
+                                       name=name,
+                                       email=email,
+                                       phone=phone,
+                                       service=service)
                 )
                 mail.send(user_msg)
                 app_logger.info(f"Confirmation email sent to user: {email}")

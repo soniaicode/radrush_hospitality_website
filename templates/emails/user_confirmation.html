@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 100% !important;
+                padding: 10px !important;
+            }
+            .content-table {
+                width: 100% !important;
+            }
+            .info-grid {
+                display: block !important;
+            }
+            .info-card {
+                width: 100% !important;
+                margin-bottom: 15px !important;
+                padding: 15px !important;
+            }
+            .header {
+                padding: 30px 20px !important;
+            }
+            .header h1 {
+                font-size: 28px !important;
+            }
+            .welcome {
+                padding: 25px 20px !important;
+            }
+            .section {
+                padding: 0 20px 20px !important;
+            }
+            .steps-grid {
+                display: block !important;
+            }
+            .step-box {
+                width: 100% !important;
+                margin-bottom: 15px !important;
+                padding: 20px !important;
+            }
+            .contact-grid {
+                display: block !important;
+            }
+            .contact-card {
+                width: 100% !important;
+                margin-bottom: 15px !important;
+            }
+            .contact-row {
+                display: block !important;
+                margin-bottom: 10px !important;
+            }
+            .contact-icon {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color:#f8f9fa;">
+    
+    <!-- Main Container -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f8f9fa; padding:20px 0;">
+        <tr>
+            <td align="center">
+                <!-- Email Container -->
+                <table width="600" cellpadding="0" cellspacing="0" border="0" class="container" style="background-color:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.08);">
+                    
+                    <!-- Header -->
+                    <tr>
+                        <td style="background:linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); padding:40px 20px;" class="header">
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="center">
+                                        <!-- Check Icon -->
+                                        <div style="background-color:#ffffff; width:80px; height:80px; border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 25px rgba(79, 70, 229, 0.3);">
+                                            <span style="font-size:40px; color:#4f46e5;">✅</span>
+                                        </div>
+                                        <!-- Main Heading -->
+                                        <h1 style="margin:0; color:#ffffff; font-size:32px; font-weight:700; letter-spacing:-0.5px;">Thank You!</h1>
+                                        <!-- Subheading -->
+                                        <p style="margin:10px 0 0; color:rgba(255,255,255,0.95); font-size:16px; font-weight:500;">
+                                            We've received your message
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <!-- Welcome Message -->
+                    <tr>
+                        <td style="padding:30px 25px 25px;" class="welcome">
+                            <h2 style="margin:0 0 15px; color:#1a1a1a; font-size:22px; font-weight:700;">Dear {{ name }},</h2>
+                            <p style="margin:0 0 15px; color:#555; font-size:15px; line-height:1.6;">
+                                Thank you for reaching out to <strong style="color:#4f46e5;">Radrush Hospitality</strong>! 
+                                We're excited to connect with you and learn more about how we can help elevate your hospitality business.
+                            </p>
+                            <p style="margin:0; color:#555; font-size:15px; line-height:1.6;">
+                                Our team will review your inquiry and get back to you within <strong style="color:#ef4444;">24 hours</strong>.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Submission Details -->
+                    <tr>
+                        <td style="padding:0 25px 25px;" class="section">
+                            <div style="background-color:#f1f5f9; border-radius:12px; padding:25px; border-left:4px solid #4f46e5;">
+                                <h3 style="margin:0 0 20px; color:#4f46e5; font-size:18px; font-weight:700; letter-spacing:0.5px; text-align:center;">
+                                    📋 Your Submission Details
+                                </h3>
+                                
+                                <!-- Details Grid -->
+                                <table width="100%" cellpadding="0" cellspacing="0" class="info-grid" style="display:grid; grid-template-columns:repeat(2, 1fr); gap:15px;">
+                                    <!-- Name -->
+                                    <td class="info-card" style="background-color:#ffffff; border-radius:10px; padding:20px; text-align:center;">
+                                        <div style="color:#4f46e5; font-size:20px; margin-bottom:10px;">👤</div>
+                                        <div style="color:#64748b; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:5px;">Name</div>
+                                        <div style="color:#1a1a1a; font-size:16px; font-weight:700; word-break:break-word;">{{ name }}</div>
+                                    </td>
+                                    
+                                    <!-- Email -->
+                                    <td class="info-card" style="background-color:#ffffff; border-radius:10px; padding:20px; text-align:center;">
+                                        <div style="color:#0ea5e9; font-size:20px; margin-bottom:10px;">📧</div>
+                                        <div style="color:#64748b; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:5px;">Email</div>
+                                        <a href="mailto:{{ email }}" style="color:#0ea5e9; font-size:15px; font-weight:600; text-decoration:none; word-break:break-all;">{{ email }}</a>
+                                    </td>
+                                    
+                                    <!-- Phone -->
+                                    <td class="info-card" style="background-color:#ffffff; border-radius:10px; padding:20px; text-align:center;">
+                                        <div style="color:#10b981; font-size:20px; margin-bottom:10px;">📱</div>
+                                        <div style="color:#64748b; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:5px;">Phone</div>
+                                        <div style="color:#1a1a1a; font-size:16px; font-weight:700;">{{ phone or 'Not provided' }}</div>
+                                    </td>
+                                    
+                                    <!-- Service -->
+                                    <td class="info-card" style="background-color:#ffffff; border-radius:10px; padding:20px; text-align:center;">
+                                        <div style="color:#8b5cf6; font-size:20px; margin-bottom:10px;">🎯</div>
+                                        <div style="color:#64748b; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:5px;">Service</div>
+                                        <div style="color:#1a1a1a; font-size:16px; font-weight:700;">{{ service or 'Not specified' }}</div>
+                                    </td>
+                                </table>
+                                
+                                <!-- Submission Time -->
+                                <div style="margin-top:20px; text-align:center;">
+                                    <div style="display:inline-flex; align-items:center; background-color:#e2e8f0; color:#64748b; padding:8px 16px; border-radius:20px; font-size:13px; font-weight:500;">
+                                        <span style="margin-right:6px;">⏰</span> Submitted: {{ submitted_at }}
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Next Steps -->
+                    <tr>
+                        <td style="padding:0 25px 25px;" class="section">
+                            <div style="background:linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius:12px; padding:25px; border-left:4px solid #f59e0b;">
+                                <h3 style="margin:0 0 20px; color:#92400e; font-size:18px; font-weight:700; text-align:center;">
+                                    🚀 What Happens Next?
+                                </h3>
+                                
+                                <!-- Steps Grid -->
+                                <table width="100%" cellpadding="0" cellspacing="0" class="steps-grid" style="display:grid; grid-template-columns:repeat(2, 1fr); gap:15px;">
+                                    <!-- Step 1 -->
+                                    <td class="step-box" style="background-color:#ffffff; border-radius:10px; padding:20px; text-align:center; border:1px solid #fef3c7;">
+                                        <div style="background-color:#fef3c7; width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin:0 auto 15px;">
+                                            <span style="font-size:20px; color:#92400e;">1</span>
+                                        </div>
+                                        <div style="color:#92400e; font-size:15px; font-weight:700; margin-bottom:8px;">Review</div>
+                                        <div style="color:#64748b; font-size:13px; line-height:1.4;">Our team reviews your inquiry</div>
+                                    </td>
+                                    
+                                    <!-- Step 2 -->
+                                    <td class="step-box" style="background-color:#ffffff; border-radius:10px; padding:20px; text-align:center; border:1px solid #fef3c7;">
+                                        <div style="background-color:#fef3c7; width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin:0 auto 15px;">
+                                            <span style="font-size:20px; color:#92400e;">2</span>
+                                        </div>
+                                        <div style="color:#92400e; font-size:15px; font-weight:700; margin-bottom:8px;">Contact</div>
+                                        <div style="color:#64748b; font-size:13px; line-height:1.4;">We'll contact you within 24 hours</div>
+                                    </td>
+                                    
+                                    <!-- Step 3 -->
+                                    <td class="step-box" style="background-color:#ffffff; border-radius:10px; padding:20px; text-align:center; border:1px solid #fef3c7;">
+                                        <div style="background-color:#fef3c7; width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin:0 auto 15px;">
+                                            <span style="font-size:20px; color:#92400e;">3</span>
+                                        </div>
+                                        <div style="color:#92400e; font-size:15px; font-weight:700; margin-bottom:8px;">Discuss</div>
+                                        <div style="color:#64748b; font-size:13px; line-height:1.4;">Discuss your specific needs</div>
+                                    </td>
+                                    
+                                    <!-- Step 4 -->
+                                    <td class="step-box" style="background-color:#ffffff; border-radius:10px; padding:20px; text-align:center; border:1px solid #fef3c7;">
+                                        <div style="background-color:#fef3c7; width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin:0 auto 15px;">
+                                            <span style="font-size:20px; color:#92400e;">4</span>
+                                        </div>
+                                        <div style="color:#92400e; font-size:15px; font-weight:700; margin-bottom:8px;">Customize</div>
+                                        <div style="color:#64748b; font-size:13px; line-height:1.4;">Create a customized solution</div>
+                                    </td>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Contact Information -->
+                    <tr>
+                        <td style="padding:0 25px 25px;" class="section">
+                            <div style="background:linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); border-radius:12px; padding:30px; color:#ffffff;">
+                                <h3 style="margin:0 0 20px; color:#ffffff; font-size:20px; font-weight:700; text-align:center;">
+                                    📞 Need Immediate Assistance?
+                                </h3>
+                                <p style="margin:0 0 25px; color:rgba(255,255,255,0.9); font-size:15px; text-align:center;">
+                                    Feel free to reach out to us directly:
+                                </p>
+                                
+                                <!-- Contact Options -->
+                                <table width="100%" cellpadding="0" cellspacing="0" class="contact-grid" style="display:grid; grid-template-columns:repeat(2, 1fr); gap:15px;">
+                                    <!-- Phone -->
+                                    <td class="contact-card" style="background-color:rgba(255,255,255,0.15); backdrop-filter:blur(10px); border-radius:10px; padding:20px; text-align:center; border:1px solid rgba(255,255,255,0.2);">
+                                        <div style="color:#ffffff; font-size:24px; margin-bottom:15px;">📞</div>
+                                        <div style="color:rgba(255,255,255,0.9); font-size:13px; font-weight:600; margin-bottom:8px;">Phone</div>
+                                        <div style="color:#ffffff; font-size:16px; font-weight:700;">7056456555</div>
+                                        <div style="color:#ffffff; font-size:16px; font-weight:700;">9271900007</div>
+                                    </td>
+                                    
+                                    <!-- Email -->
+                                    <td class="contact-card" style="background-color:rgba(255,255,255,0.15); backdrop-filter:blur(10px); border-radius:10px; padding:20px; text-align:center; border:1px solid rgba(255,255,255,0.2);">
+                                        <div style="color:#ffffff; font-size:24px; margin-bottom:15px;">📧</div>
+                                        <div style="color:rgba(255,255,255,0.9); font-size:13px; font-weight:600; margin-bottom:8px;">Email</div>
+                                        <div style="color:#ffffff; font-size:15px; font-weight:600;">radrushmarketing@gmail.com</div>
+                                    </td>
+                                </table>
+                                
+                                <!-- Hours -->
+                                <div style="margin-top:25px; text-align:center;">
+                                    <div style="display:inline-flex; align-items:center; background-color:rgba(255,255,255,0.15); color:rgba(255,255,255,0.9); padding:10px 20px; border-radius:20px; font-size:13px; font-weight:500;">
+                                        <span style="margin-right:6px;">🏢</span> Office Hours: Mon-Sat, 9:00 AM - 7:00 PM IST
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color:#f1f5f9; padding:30px 25px; text-align:center; border-top:1px solid #e2e8f0;">
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="color:#1a1a1a; font-size:16px; font-weight:700; line-height:1.5; margin-bottom:10px;">
+                                        Best regards,<br>
+                                        <span style="color:#4f46e5;">Radrush Hospitality Team</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color:#64748b; font-size:12px; line-height:1.5; margin-top:15px;">
+                                        <p style="margin:0 0 5px;">Elevating hospitality experiences since 2024</p>
+                                        <p style="margin:0; font-size:11px; color:#94a3b8;">
+                                            © 2024 Radrush Hospitality. All rights reserved.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
