@@ -125,8 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Scr
-oll to Top Button
+// Scroll to Top Button
 document.addEventListener('DOMContentLoaded', () => {
     // Create scroll to top button
     const scrollBtn = document.createElement('div');
