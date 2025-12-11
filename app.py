@@ -143,31 +143,167 @@ Message:
 Submitted at: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC
                     """,
                     html=f"""
+<!DOCTYPE html>
 <html>
-<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-    <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
-        <h2 style="color: #667eea; border-bottom: 2px solid #667eea; padding-bottom: 10px;">
-            New Contact Form Submission
-        </h2>
-        
-        <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p><strong style="color: #667eea;">Name:</strong> {name}</p>
-            <p><strong style="color: #667eea;">Email:</strong> <a href="mailto:{email}">{email}</a></p>
-            <p><strong style="color: #667eea;">Phone:</strong> {phone or 'Not provided'}</p>
-            <p><strong style="color: #667eea;">Service Interested:</strong> {service or 'Not specified'}</p>
-        </div>
-        
-        <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p><strong style="color: #667eea;">Message:</strong></p>
-            <p style="background: #f5f5f5; padding: 15px; border-left: 4px solid #667eea; border-radius: 4px;">
-                {message}
-            </p>
-        </div>
-        
-        <p style="color: #888; font-size: 12px; text-align: center; margin-top: 20px;">
-            Submitted at: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC
-        </p>
-    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px;">
+        <tr>
+            <td align="center">
+                <!-- Main Container -->
+                <table width="600" cellpadding="0" cellspacing="0" style="background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; max-width: 100%;">
+                    
+                    <!-- Header with Logo and Brand -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 30px; text-align: center;">
+                            <div style="background: white; width: 80px; height: 80px; border-radius: 20px; margin: 0 auto 20px; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                                <span style="font-size: 40px; font-weight: 900; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">R</span>
+                            </div>
+                            <h1 style="margin: 0; color: white; font-size: 32px; font-weight: 800; letter-spacing: -0.5px;">Radrush Hospitality</h1>
+                            <p style="margin: 10px 0 0; color: rgba(255,255,255,0.9); font-size: 14px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">New Contact Inquiry</p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Alert Badge -->
+                    <tr>
+                        <td style="padding: 30px 30px 0;">
+                            <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 15px 25px; border-radius: 50px; display: inline-block; font-weight: 700; font-size: 14px; box-shadow: 0 8px 20px rgba(245,87,108,0.3);">
+                                🔔 New Lead Alert
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Contact Information Cards -->
+                    <tr>
+                        <td style="padding: 30px;">
+                            
+                            <!-- Name Card -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; margin-bottom: 15px; overflow: hidden;">
+                                <tr>
+                                    <td style="padding: 20px;">
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="50" style="vertical-align: top;">
+                                                    <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: bold;">
+                                                        👤
+                                                    </div>
+                                                </td>
+                                                <td style="padding-left: 15px;">
+                                                    <p style="margin: 0; font-size: 12px; color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Full Name</p>
+                                                    <p style="margin: 5px 0 0; font-size: 18px; color: #1a1a1a; font-weight: 700;">{name}</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Email Card -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); border-radius: 15px; margin-bottom: 15px; overflow: hidden;">
+                                <tr>
+                                    <td style="padding: 20px;">
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="50" style="vertical-align: top;">
+                                                    <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #f093fb, #f5576c); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: bold;">
+                                                        📧
+                                                    </div>
+                                                </td>
+                                                <td style="padding-left: 15px;">
+                                                    <p style="margin: 0; font-size: 12px; color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Email Address</p>
+                                                    <p style="margin: 5px 0 0; font-size: 16px; color: #1a1a1a; font-weight: 600;"><a href="mailto:{email}" style="color: #f5576c; text-decoration: none;">{email}</a></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Phone Card -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border-radius: 15px; margin-bottom: 15px; overflow: hidden;">
+                                <tr>
+                                    <td style="padding: 20px;">
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="50" style="vertical-align: top;">
+                                                    <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #4facfe, #00f2fe); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: bold;">
+                                                        📱
+                                                    </div>
+                                                </td>
+                                                <td style="padding-left: 15px;">
+                                                    <p style="margin: 0; font-size: 12px; color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Phone Number</p>
+                                                    <p style="margin: 5px 0 0; font-size: 18px; color: #1a1a1a; font-weight: 700;">{phone or 'Not provided'}</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Service Card -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%); border-radius: 15px; margin-bottom: 20px; overflow: hidden;">
+                                <tr>
+                                    <td style="padding: 20px;">
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="50" style="vertical-align: top;">
+                                                    <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #fa709a, #fee140); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: bold;">
+                                                        🎯
+                                                    </div>
+                                                </td>
+                                                <td style="padding-left: 15px;">
+                                                    <p style="margin: 0; font-size: 12px; color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Service Interested</p>
+                                                    <p style="margin: 5px 0 0; font-size: 18px; color: #1a1a1a; font-weight: 700;">{service or 'Not specified'}</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Message Card -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(102,126,234,0.3);">
+                                <tr>
+                                    <td style="padding: 25px;">
+                                        <p style="margin: 0 0 15px; font-size: 14px; color: rgba(255,255,255,0.9); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">💬 Message</p>
+                                        <div style="background: rgba(255,255,255,0.95); padding: 20px; border-radius: 12px; border-left: 5px solid #f5576c;">
+                                            <p style="margin: 0; color: #333; font-size: 16px; line-height: 1.8; font-weight: 500;">{message}</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                        </td>
+                    </tr>
+                    
+                    <!-- Action Button -->
+                    <tr>
+                        <td style="padding: 0 30px 30px; text-align: center;">
+                            <a href="mailto:{email}" style="display: inline-block; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 16px; box-shadow: 0 10px 30px rgba(245,87,108,0.4); transition: all 0.3s;">
+                                📧 Reply to {name.split()[0]}
+                            </a>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background: #f8f9fa; padding: 30px; text-align: center; border-top: 1px solid #e0e0e0;">
+                            <p style="margin: 0 0 10px; color: #666; font-size: 13px; font-weight: 600;">
+                                ⏰ Submitted at: {datetime.utcnow().strftime('%B %d, %Y at %I:%M %p')} UTC
+                            </p>
+                            <p style="margin: 10px 0 0; color: #999; font-size: 12px;">
+                                © 2024 Radrush Hospitality. All rights reserved.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
                     """
@@ -198,37 +334,136 @@ Phone: 7056456555 / 9271900007
 Email: radrushmarketing@gmail.com
                     """,
                     html=f"""
+<!DOCTYPE html>
 <html>
-<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-    <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
-        <h2 style="color: #667eea;">Thank you for contacting us!</h2>
-        
-        <p>Dear <strong>{name}</strong>,</p>
-        
-        <p>Thank you for reaching out to <strong>Radrush Hospitality</strong>!</p>
-        
-        <p>We have received your message and will get back to you as soon as possible.</p>
-        
-        <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #667eea; margin-top: 0;">Your submitted details:</h3>
-            <p><strong>Name:</strong> {name}</p>
-            <p><strong>Email:</strong> {email}</p>
-            <p><strong>Phone:</strong> {phone or 'Not provided'}</p>
-            <p><strong>Service:</strong> {service or 'Not specified'}</p>
-        </div>
-        
-        <div style="background: #667eea; color: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p style="margin: 0;"><strong>Best regards,</strong></p>
-            <p style="margin: 5px 0 0 0;">Radrush Hospitality Team</p>
-            <p style="margin: 10px 0 0 0; font-size: 14px;">
-                📞 Phone: 7056456555 / 9271900007<br>
-                📧 Email: radrushmarketing@gmail.com
-            </p>
-        </div>
-    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px;">
+        <tr>
+            <td align="center">
+                <!-- Main Container -->
+                <table width="600" cellpadding="0" cellspacing="0" style="background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; max-width: 100%;">
+                    
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 50px 30px; text-align: center;">
+                            <div style="background: white; width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 25px; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 15px 40px rgba(0,0,0,0.2);">
+                                <span style="font-size: 50px;">✅</span>
+                            </div>
+                            <h1 style="margin: 0; color: white; font-size: 36px; font-weight: 800; letter-spacing: -0.5px;">Thank You!</h1>
+                            <p style="margin: 15px 0 0; color: rgba(255,255,255,0.95); font-size: 18px; font-weight: 500;">We've received your message</p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Welcome Message -->
+                    <tr>
+                        <td style="padding: 40px 30px 30px;">
+                            <h2 style="margin: 0 0 20px; color: #1a1a1a; font-size: 24px; font-weight: 700;">Dear {name},</h2>
+                            <p style="margin: 0 0 20px; color: #555; font-size: 16px; line-height: 1.8;">
+                                Thank you for reaching out to <strong style="color: #667eea;">Radrush Hospitality</strong>! 
+                                We're excited to connect with you and learn more about how we can help elevate your hospitality business.
+                            </p>
+                            <p style="margin: 0; color: #555; font-size: 16px; line-height: 1.8;">
+                                Our team will review your inquiry and get back to you within <strong style="color: #f5576c;">24 hours</strong>.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Submission Details -->
+                    <tr>
+                        <td style="padding: 0 30px 30px;">
+                            <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; padding: 25px; border-left: 5px solid #667eea;">
+                                <h3 style="margin: 0 0 20px; color: #667eea; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">📋 Your Submission Details</h3>
+                                
+                                <table width="100%" cellpadding="8" cellspacing="0">
+                                    <tr>
+                                        <td style="color: #666; font-size: 14px; font-weight: 600; width: 140px;">Name:</td>
+                                        <td style="color: #1a1a1a; font-size: 15px; font-weight: 700;">{name}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: #666; font-size: 14px; font-weight: 600;">Email:</td>
+                                        <td style="color: #667eea; font-size: 15px; font-weight: 600;">{email}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: #666; font-size: 14px; font-weight: 600;">Phone:</td>
+                                        <td style="color: #1a1a1a; font-size: 15px; font-weight: 700;">{phone or 'Not provided'}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: #666; font-size: 14px; font-weight: 600;">Service:</td>
+                                        <td style="color: #1a1a1a; font-size: 15px; font-weight: 700;">{service or 'Not specified'}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- What's Next Section -->
+                    <tr>
+                        <td style="padding: 0 30px 30px;">
+                            <div style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); border-radius: 15px; padding: 25px;">
+                                <h3 style="margin: 0 0 15px; color: #d35400; font-size: 18px; font-weight: 700;">🚀 What Happens Next?</h3>
+                                <ul style="margin: 0; padding-left: 20px; color: #555; font-size: 15px; line-height: 2;">
+                                    <li>Our team reviews your inquiry</li>
+                                    <li>We'll contact you within 24 hours</li>
+                                    <li>Discuss your specific needs</li>
+                                    <li>Create a customized solution for you</li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Contact Information -->
+                    <tr>
+                        <td style="padding: 0 30px 40px;">
+                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 30px; text-align: center; color: white;">
+                                <h3 style="margin: 0 0 20px; font-size: 20px; font-weight: 700;">Need Immediate Assistance?</h3>
+                                <p style="margin: 0 0 20px; font-size: 15px; opacity: 0.95;">Feel free to reach out to u
+                       
+                                <ta">
+                                    <tr>
+                >
+                                            
+                                                <p style="margin: 0; font-size: 14pe</p>
+                                                <p style="ma</p>
+                                            </
+            td>
+                                    </tr>
+                                    <tr>
+                                        <td ali">
+                              ">
+                                                <p style="margin: 0Email</p>
+                                                <p style="margin: il.com</p>
+                                iv>
+    >
+                                    </tr>
+/table>
+                            </div>
+                        </td>
+                   </tr>
+                
+                    <!-- Foo
+                    <tr>
+        >
+                            <p style="margin: 0 0 10px; color: #1a1a1a; 
+                                s,<br>
+                                <span style="col>
+                            </p>
+                            <p style="margin: 15px 0 0; color: px;">
+                          
+                            </p>
+ </td>
+                    </tr>
+                
+        >
+            </td>
+        </tr>
+    </tae>
 </body>
 </html>
-                    """
+        """            blable/t        <                           eserved.rights rality. All drush Hospit   © 2024 Ra   : 12ont-size99; f#9 Team</spanlityush Hospita">Radr #667eea;r:oBest regard">ght: 700; font-wei 16px;font-size:;" #e0e0e0 solidr-top: 1pxter; borde-align: cenx; textg: 30pddinpa9fa; und: #f8fbackgrostyle=" <td                ->ter -               <                      /td <                                    </d           ng@gmarketiradrushmaht: 700;">nt-weig: 16px; font-size 0 0; fo5px0.9;">📧 ty: ci; opaze: 14px; font-si 5px;argin:e-block; mlindisplay: in; ing: 15px: 12px; paddr-radius borde5,0.2);25,255,(255baground: rg="back style      <div        centergn="        </                    iv>d0007719055 / 92>70564565 700;"-weight:x; fontnt-size: 16p0; foin: 5px 0 rg📞 Phony: 0.9;">it; opacx 5px;">in:margline-block; : insplaydi; ng: 15pxddi: 12px; paiusad border-r2);,255,255,0.gba(255nd: rbackgrouyle="<div str""centetd align=      <                  pacing="0lls0" cedding="1" cellpadth="100%ble wi         </p>ly:s direct
                 )
                 mail.send(user_msg)
                 app_logger.info(f"Confirmation email sent to user: {email}")
