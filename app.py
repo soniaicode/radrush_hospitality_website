@@ -36,6 +36,8 @@ app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'True') == 'True'
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_CONNECT_TIMEOUT'] = 10  # Connection timeout
+app.config['MAIL_TIMEOUT'] = 10  # Send timeout
 
 mongo = PyMongo(app)
 mail = Mail(app)
@@ -121,8 +123,17 @@ def contact():
                 app_logger.error(f"Database error: {db_error}. Contact: {name} ({email})")
                 print(f"Database error: {db_error}")
             
-            # Send email to admin
+            # Send email to admin (with timeout protection)
             try:
+                from threading import Thread
+                
+                def send_async_email(app, msg):
+                    with app.app_context():
+                        try:
+                            mail.send(msg)
+                        except Exception as e:
+                            app_logger.error(f"Async email error: {e}")
+                
                 admin_email = os.getenv('ADMIN_EMAIL', 'radrushmarketing@gmail.com')
                 submitted_at = datetime.utcnow().strftime('%B %d, %Y at %I:%M %p')
                 
@@ -151,8 +162,6 @@ Submitted at: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC
                                        message=message,
                                        submitted_at=submitted_at)
                 )
-                mail.send(msg)
-                app_logger.info(f"Admin notification email sent to {admin_email} for contact from {name}")
                 
                 # Confirmation email to user - Using template
                 user_msg = Message(
@@ -182,8 +191,12 @@ Email: radrushmarketing@gmail.com
                                        phone=phone,
                                        service=service)
                 )
-                mail.send(user_msg)
-                app_logger.info(f"Confirmation email sent to user: {email}")
+                
+                # Send emails in background threads to avoid blocking
+                Thread(target=send_async_email, args=(app._get_current_object(), msg)).start()
+                Thread(target=send_async_email, args=(app._get_current_object(), user_msg)).start()
+                
+                app_logger.info(f"Emails queued for sending to {admin_email} and {email}")
                 
             except Exception as email_error:
                 app_logger.error(f"Email sending error for {email}: {email_error}")
