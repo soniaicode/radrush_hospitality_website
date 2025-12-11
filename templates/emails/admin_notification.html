@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
         @media only screen and (max-width: 600px) {
             .container {
                 width: 100% !important;
@@ -56,20 +62,24 @@
                     
                     <!-- Header -->
                     <tr>
-                        <td style="background:linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); padding:30px 20px;" class="header">
+                        <td style="background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); padding:35px 20px; position:relative; overflow:hidden;" class="header">
+                            <!-- Decorative Elements -->
+                            <div style="position:absolute; top:-50px; right:-50px; width:150px; height:150px; background:rgba(255,255,255,0.1); border-radius:50%; opacity:0.5;"></div>
+                            <div style="position:absolute; bottom:-30px; left:-30px; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%; opacity:0.5;"></div>
+                            
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td align="center">
-                                        <!-- Logo -->
-                                        <div style="background-color:#ffffff; width:60px; height:60px; border-radius:12px; margin:0 auto 15px; display:flex; align-items:center; justify-content:center;">
-                                            <span style="font-size:30px; font-weight:bold; background:linear-gradient(135deg, #4f46e5, #7c3aed); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">R</span>
+                                    <td align="center" style="position:relative; z-index:1;">
+                                        <!-- Logo with Animation Effect -->
+                                        <div style="background:linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); width:70px; height:70px; border-radius:16px; margin:0 auto 18px; box-shadow:0 10px 30px rgba(0,0,0,0.2), 0 0 0 4px rgba(255,255,255,0.3); display:inline-block; text-align:center; line-height:70px;">
+                                            <span style="font-size:36px; font-weight:800; background:linear-gradient(135deg, #6366f1, #8b5cf6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">R</span>
                                         </div>
                                         <!-- Company Name -->
-                                        <h1 style="margin:0; color:#ffffff; font-size:26px; font-weight:600;">Radrush Hospitality</h1>
+                                        <h1 style="margin:0; color:#ffffff; font-size:28px; font-weight:800; letter-spacing:-0.5px; text-shadow:0 2px 10px rgba(0,0,0,0.1);">Radrush Hospitality</h1>
                                         <!-- Tagline -->
-                                        <p style="margin:8px 0 0; color:rgba(255,255,255,0.9); font-size:14px; font-weight:500;">New Contact Inquiry</p>
-                                        <!-- Notification Badge -->
-                                        <div style="display:inline-block; background-color:rgba(255,255,255,0.2); color:#ffffff; padding:6px 16px; border-radius:20px; font-size:12px; font-weight:600; margin-top:12px;">
+                                        <p style="margin:10px 0 0; color:rgba(255,255,255,0.95); font-size:15px; font-weight:500; letter-spacing:0.5px;">New Contact Inquiry</p>
+                                        <!-- Notification Badge with Pulse Effect -->
+                                        <div style="display:inline-block; background:linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.15) 100%); backdrop-filter:blur(10px); color:#ffffff; padding:8px 20px; border-radius:25px; font-size:13px; font-weight:700; margin-top:15px; border:2px solid rgba(255,255,255,0.3); box-shadow:0 4px 15px rgba(0,0,0,0.1);">
                                             🔔 New Lead Alert
                                         </div>
                                     </td>
@@ -83,10 +93,12 @@
                         <td style="padding:25px 20px;">
                             
                             <!-- Timestamp -->
-                            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+                            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:25px;">
                                 <tr>
-                                    <td style="color:#666666; font-size:12px; text-align:center;">
-                                        ⏰ Submitted: {{ submitted_at }}
+                                    <td align="center">
+                                        <div style="display:inline-block; background:linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); color:#0369a1; padding:10px 20px; border-radius:25px; font-size:13px; font-weight:600; border:1px solid #bae6fd; box-shadow:0 2px 8px rgba(3,105,161,0.1);">
+                                            ⏰ Submitted: {{ submitted_at }}
+                                        </div>
                                     </td>
                                 </tr>
                             </table>
@@ -95,25 +107,29 @@
                             <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:25px;">
                                 <!-- Name & Email Row -->
                                 <tr class="detail-row">
-                                    <td width="48%" align="center" class="detail-cell" style="background-color:#f1f5f9; border-radius:10px; padding:15px; margin-right:4%; display:inline-block; vertical-align:top;">
+                                    <td width="48%" align="center" class="detail-cell" style="background:linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-radius:12px; padding:18px; margin-right:4%; display:inline-block; vertical-align:top; border:1px solid #e2e8f0; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
                                         <table width="100%">
                                             <tr>
                                                 <td align="center">
-                                                    <div style="color:#4f46e5; font-size:24px; margin-bottom:8px;">👤</div>
-                                                    <div class="label" style="color:#64748b; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:5px;">Name</div>
-                                                    <div class="value" style="color:#0f172a; font-size:16px; font-weight:700; word-break:break-word;">{{ name }}</div>
+                                                    <div style="background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); width:45px; height:45px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px; box-shadow:0 4px 12px rgba(99,102,241,0.3);">
+                                                        <span style="font-size:22px;">👤</span>
+                                                    </div>
+                                                    <div class="label" style="color:#64748b; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Name</div>
+                                                    <div class="value" style="color:#0f172a; font-size:17px; font-weight:800; word-break:break-word;">{{ name }}</div>
                                                 </td>
                                             </tr>
                                         </table>
                                     </td>
-                                    <td width="48%" align="center" class="detail-cell" style="background-color:#f0f9ff; border-radius:10px; padding:15px; display:inline-block; vertical-align:top;">
+                                    <td width="48%" align="center" class="detail-cell" style="background:linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-radius:12px; padding:18px; display:inline-block; vertical-align:top; border:1px solid #bae6fd; box-shadow:0 2px 8px rgba(14,165,233,0.08);">
                                         <table width="100%">
                                             <tr>
                                                 <td align="center">
-                                                    <div style="color:#0ea5e9; font-size:24px; margin-bottom:8px;">📧</div>
-                                                    <div class="label" style="color:#64748b; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:5px;">Email</div>
+                                                    <div style="background:linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%); width:45px; height:45px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px; box-shadow:0 4px 12px rgba(14,165,233,0.3);">
+                                                        <span style="font-size:22px;">📧</span>
+                                                    </div>
+                                                    <div class="label" style="color:#0369a1; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Email</div>
                                                     <div class="value">
-                                                        <a href="mailto:{{ email }}" style="color:#0ea5e9; font-size:15px; font-weight:600; text-decoration:none; word-break:break-all;">{{ email }}</a>
+                                                        <a href="mailto:{{ email }}" style="color:#0284c7; font-size:15px; font-weight:700; text-decoration:none; word-break:break-all;">{{ email }}</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -123,24 +139,28 @@
                                 
                                 <!-- Phone & Service Row -->
                                 <tr class="detail-row" style="margin-top:15px;">
-                                    <td width="48%" align="center" class="detail-cell" style="background-color:#f0fdf4; border-radius:10px; padding:15px; margin-right:4%; display:inline-block; vertical-align:top;">
+                                    <td width="48%" align="center" class="detail-cell" style="background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius:12px; padding:18px; margin-right:4%; display:inline-block; vertical-align:top; border:1px solid #bbf7d0; box-shadow:0 2px 8px rgba(16,185,129,0.08);">
                                         <table width="100%">
                                             <tr>
                                                 <td align="center">
-                                                    <div style="color:#10b981; font-size:24px; margin-bottom:8px;">📱</div>
-                                                    <div class="label" style="color:#64748b; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:5px;">Phone</div>
-                                                    <div class="value" style="color:#0f172a; font-size:16px; font-weight:700;">{{ phone or 'Not provided' }}</div>
+                                                    <div style="background:linear-gradient(135deg, #10b981 0%, #059669 100%); width:45px; height:45px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px; box-shadow:0 4px 12px rgba(16,185,129,0.3);">
+                                                        <span style="font-size:22px;">📱</span>
+                                                    </div>
+                                                    <div class="label" style="color:#065f46; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Phone</div>
+                                                    <div class="value" style="color:#0f172a; font-size:17px; font-weight:800;">{{ phone or 'Not provided' }}</div>
                                                 </td>
                                             </tr>
                                         </table>
                                     </td>
-                                    <td width="48%" align="center" class="detail-cell" style="background-color:#fef7ff; border-radius:10px; padding:15px; display:inline-block; vertical-align:top;">
+                                    <td width="48%" align="center" class="detail-cell" style="background:linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); border-radius:12px; padding:18px; display:inline-block; vertical-align:top; border:1px solid #e9d5ff; box-shadow:0 2px 8px rgba(139,92,246,0.08);">
                                         <table width="100%">
                                             <tr>
                                                 <td align="center">
-                                                    <div style="color:#8b5cf6; font-size:24px; margin-bottom:8px;">🎯</div>
-                                                    <div class="label" style="color:#64748b; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:5px;">Service</div>
-                                                    <div class="value" style="color:#0f172a; font-size:16px; font-weight:700;">{{ service or 'Not specified' }}</div>
+                                                    <div style="background:linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); width:45px; height:45px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px; box-shadow:0 4px 12px rgba(139,92,246,0.3);">
+                                                        <span style="font-size:22px;">🎯</span>
+                                                    </div>
+                                                    <div class="label" style="color:#6b21a8; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Service</div>
+                                                    <div class="value" style="color:#0f172a; font-size:17px; font-weight:800;">{{ service or 'Not specified' }}</div>
                                                 </td>
                                             </tr>
                                         </table>
@@ -149,12 +169,14 @@
                             </table>
                             
                             <!-- Message Section -->
-                            <table width="100%" cellpadding="0" cellspacing="0" class="message-box" style="background-color:#f8fafc; border-radius:12px; padding:20px; border-left:4px solid #4f46e5; margin-bottom:25px;">
+                            <table width="100%" cellpadding="0" cellspacing="0" class="message-box" style="background:linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); border-radius:14px; padding:25px; border-left:5px solid #eab308; margin-bottom:30px; box-shadow:0 4px 15px rgba(234,179,8,0.15);">
                                 <tr>
                                     <td>
-                                        <div style="color:#4f46e5; font-size:24px; margin-bottom:10px; text-align:center;">💬</div>
-                                        <div style="color:#64748b; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:8px; text-align:center;">Message</div>
-                                        <div style="color:#334155; font-size:15px; line-height:1.6; text-align:center; padding:0 10px;">{{ message }}</div>
+                                        <div style="background:linear-gradient(135deg, #eab308 0%, #f59e0b 100%); width:50px; height:50px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; margin:0 auto 15px; box-shadow:0 4px 12px rgba(234,179,8,0.3);">
+                                            <span style="font-size:26px;">💬</span>
+                                        </div>
+                                        <div style="color:#854d0e; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:12px; text-align:center;">Message</div>
+                                        <div style="color:#422006; font-size:16px; line-height:1.7; text-align:center; padding:0 15px; font-weight:500;">{{ message }}</div>
                                     </td>
                                 </tr>
                             </table>
@@ -163,7 +185,7 @@
                             <table width="100%" cellpadding="0" cellspacing="0" style="text-align:center;">
                                 <tr>
                                     <td>
-                                        <a href="mailto:{{ email }}" style="display:inline-block; background:linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color:#ffffff; padding:14px 32px; border-radius:8px; text-decoration:none; font-weight:600; font-size:15px; box-shadow:0 4px 12px rgba(79, 70, 229, 0.25);" class="reply-btn">
+                                        <a href="mailto:{{ email }}" style="display:inline-block; background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); color:#ffffff; padding:16px 40px; border-radius:12px; text-decoration:none; font-weight:700; font-size:16px; box-shadow:0 6px 20px rgba(99,102,241,0.4), 0 0 0 3px rgba(99,102,241,0.1); transition:all 0.3s ease;" class="reply-btn">
                                             📧 Reply to {{ name.split()[0] if name else 'Contact' }}
                                         </a>
                                     </td>
@@ -175,12 +197,12 @@
                     
                     <!-- Footer -->
                     <tr>
-                        <td style="background-color:#f1f5f9; padding:20px; text-align:center; border-top:1px solid #e2e8f0;">
+                        <td style="background:linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding:25px; text-align:center; border-top:2px solid #e2e8f0;">
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td style="color:#64748b; font-size:12px; line-height:1.5;">
-                                        <p style="margin:0 0 5px;">Need help? Contact us at radrushmarketing@gmail.com</p>
-                                        <p style="margin:0; font-size:11px; color:#94a3b8;">© 2024 Radrush Hospitality. All rights reserved.</p>
+                                    <td style="color:#64748b; font-size:13px; line-height:1.6;">
+                                        <p style="margin:0 0 8px; font-weight:600;">Need help? Contact us at <a href="mailto:radrushmarketing@gmail.com" style="color:#6366f1; text-decoration:none; font-weight:700;">radrushmarketing@gmail.com</a></p>
+                                        <p style="margin:0; font-size:12px; color:#94a3b8; font-weight:500;">© 2024 Radrush Hospitality. All rights reserved.</p>
                                     </td>
                                 </tr>
                             </table>

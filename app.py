@@ -134,10 +134,13 @@ def contact():
                         try:
                             # Set socket timeout for SMTP
                             socket.setdefaulttimeout(15)
+                            print(f"[DEBUG] Sending {recipient_type} email to {msg.recipients}...")
                             mail.send(msg)
-                            app_logger.info(f"Email sent successfully to {recipient_type}: {msg.recipients}")
+                            print(f"[SUCCESS] {recipient_type} email sent to {msg.recipients}")
+                            app_logger.info(f"✅ Email sent successfully to {recipient_type}: {msg.recipients}")
                         except Exception as e:
-                            app_logger.error(f"Async email error ({recipient_type}): {str(e)}")
+                            print(f"[ERROR] {recipient_type} email failed: {str(e)}")
+                            app_logger.error(f"❌ Async email error ({recipient_type}): {str(e)}")
                             import traceback
                             app_logger.error(f"Traceback: {traceback.format_exc()}")
                 
@@ -196,7 +199,8 @@ Email: radrushmarketing@gmail.com
                                        name=name,
                                        email=email,
                                        phone=phone,
-                                       service=service)
+                                       service=service,
+                                       submitted_at=submitted_at)
                 )
                 
                 # Send emails in background threads to avoid blocking
